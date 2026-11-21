@@ -1,0 +1,19 @@
+{
+ "type": "shopapp-users",
+ "v": 1,
+ "keyId": "k20261121-owOAI",
+ "iter": 600000,
+ "owner": "Shop owner",
+ "contact": "WhatsApp +91 88608 33360",
+ "site": "https://tosachinsaurav-hue.github.io/shop-app/",
+ "users": {
+  "owner": {
+   "salt": "IF97iuBTi/RxYUGQuhuKWA==",
+   "iv": "hPWOGtkmGEO1XPoi",
+   "wrapped": "sxWqVMZVLD0OW24lChROU8wglVfwAC+6nBgSvsW424lgVWX/5ywXTTXGe6ZtkzCr",
+   "note": "Owner",
+   "expires": "",
+   "created": "2026-11-21"
+  }
+ }
+}

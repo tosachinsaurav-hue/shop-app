@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0E6B5E">
+<meta name="robots" content="noindex">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>दुकान ऐप · Shop App</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F5F3EF;--card:#fff;--ink:#1B1A17;--muted:#5E5A53;--line:#E4E0D8;--pri:#0E6B5E;--pri-ink:#fff;--seg:#E7E3DC;--bad:#B3261E;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#121311;--card:#1C1D1A;--ink:#ECEAE5;--muted:#A9A49B;--line:#33342F;--pri:#3FA592;--pri-ink:#07201B;--seg:#2C2D29;--bad:#F2867E;color-scheme:dark}}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,"Noto Sans Devanagari",system-ui,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.top{display:flex;justify-content:flex-end;padding:12px 14px}
+.seg{display:flex;background:var(--seg);border-radius:999px;padding:3px;gap:2px}
+.seg button{border:0;background:transparent;border-radius:999px;min-height:36px;padding:0 12px;font:600 13px Inter,"Noto Sans Devanagari",sans-serif;color:var(--muted);cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.14)}
+main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:12px 20px 40px}
+.box{width:min(400px,100%);display:flex;flex-direction:column;gap:16px}
+.logo{width:64px;height:64px;border-radius:18px;background:var(--pri);display:flex;align-items:center;justify-content:center}
+h1{margin:0;font:700 28px/1.15 "Space Grotesk",Inter,"Noto Sans Devanagari",sans-serif}
+p{margin:0}.muted{color:var(--muted)}.sm{font-size:13px}
+form{display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
+input{border:1px solid var(--line);background:var(--card);border-radius:12px;min-height:50px;padding:0 14px;font:500 16px Inter,"Noto Sans Devanagari",sans-serif;color:var(--ink);width:100%}
+input:focus,button:focus-visible{outline:2px solid var(--pri);outline-offset:1px}
+.pw{position:relative}.pw input{padding-right:64px}
+.pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--pri);font:600 13px Inter,"Noto Sans Devanagari",sans-serif;min-height:40px;padding:0 10px;cursor:pointer}
+.go{border:0;border-radius:14px;min-height:52px;background:var(--pri);color:var(--pri-ink);font:700 16px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer}
+.go[disabled]{opacity:.55;cursor:wait}
+.err{color:var(--bad);font-size:14px;font-weight:600;min-height:20px}
+.note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted)}
+.wait{display:flex;align-items:center;gap:10px;color:var(--muted)}
+.spin{width:20px;height:20px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--pri);animation:sp 0.9s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.spin{animation:none}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+<div class="top"><div class="seg" role="group" aria-label="Language / भाषा"><button type="button" data-l="hi" lang="hi">हिंदी</button><button type="button" data-l="en" lang="en">EN</button></div></div>
+<main>
+  <div class="box">
+    <div class="logo" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div>
+    <div id="waitBox" class="wait" role="status"><span class="spin"></span><span data-t="opening"></span></div>
+    <div id="loginBox" class="box" hidden>
+      <div><h1 data-t="title"></h1><p class="muted" data-t="sub" style="margin-top:6px"></p></div>
+      <form id="f" autocomplete="on" novalidate>
+        <label><span data-t="user"></span><input id="u" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
+        <label><span data-t="pass"></span><span class="pw"><input id="p" name="password" type="password" autocomplete="current-password" required><button type="button" id="show" data-t="show"></button></span></label>
+        <div class="err" id="err" role="alert"></div>
+        <button class="go" id="go" type="submit" data-t="open"></button>
+      </form>
+      <div class="note" id="contact" hidden></div>
+    </div>
+  </div>
+</main>
+<script>
+{
+'use strict';
+const W = {
+  opening: ['Opening the app…', 'ऐप खुल रहा है…'],
+  title: ['Shop App', 'दुकान ऐप'],
+  sub: ['Log in with the username and password you were given.', 'आपको दिए गए यूज़र नाम और पासवर्ड से लॉग इन करें।'],
+  user: ['Username', 'यूज़र नाम'], pass: ['Password', 'पासवर्ड'], show: ['Show', 'दिखाएँ'], hide: ['Hide', 'छिपाएँ'],
+  open: ['Log in', 'लॉग इन करें'], checking: ['Checking…', 'जाँच हो रही है…'],
+  wrong: ['Wrong username or password.', 'यूज़र नाम या पासवर्ड गलत है।'],
+  empty: ['Enter username and password.', 'यूज़र नाम और पासवर्ड डालें।'],
+  wait: ['Too many tries. Wait {n} seconds.', 'बहुत बार गलत हुआ। {n} सेकंड रुकें।'],
+  revoked: ['Access for this login has been stopped. Contact the app owner.', 'इस लॉग इन की अनुमति बंद कर दी गई है। ऐप के मालिक से संपर्क करें।'],
+  expired: ['This login has expired. Contact the app owner.', 'इस लॉग इन की अवधि खत्म हो गई है। ऐप के मालिक से संपर्क करें।'],
+  newver: ['A new version is available. Log in again to open it.', 'नया वर्ज़न आया है। खोलने के लिए फिर से लॉग इन करें।'],
+  offline: ['No internet. Connect once to log in on this phone.', 'इंटरनेट नहीं है। इस फ़ोन पर लॉग इन करने के लिए एक बार इंटरनेट चालू करें।'],
+  broken: ['The app files could not be read. Contact the app owner.', 'ऐप की फ़ाइलें नहीं पढ़ी जा सकीं। ऐप के मालिक से संपर्क करें।'],
+  noCrypto: ['This browser cannot open the app. Use Chrome on Android.', 'इस ब्राउज़र में ऐप नहीं खुल सकता। Android पर Chrome इस्तेमाल करें।'],
+  ask: ['Need a login? Ask {o}', 'लॉग इन चाहिए? {o} से संपर्क करें']
+};
+let lang = 'hi'; try { lang = localStorage.getItem('shopapp.gateLang') || 'hi'; } catch (e) {}
+const tr = (k, v) => { let s = (W[k] || [k, k])[lang === 'hi' ? 1 : 0]; if (v) for (const x in v) s = s.split('{' + x + '}').join(v[x]); return s; };
+const $ = id => document.getElementById(id);
+let msgKey = '', msgVars = null, users = null;
+function paint() {
+  document.documentElement.lang = lang;
+  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = tr(el.dataset.t); });
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === lang)));
+  $('show').textContent = $('p').type === 'password' ? tr('show') : tr('hide');
+  $('err').textContent = msgKey ? tr(msgKey, msgVars) : '';
+  const c = $('contact');
+  if (users && (users.owner || users.contact)) { c.hidden = false; c.textContent = tr('ask', { o: [users.owner, users.contact].filter(Boolean).join(' · ') }); } else c.hidden = true;
+}
+const say = (k, v) => { msgKey = k; msgVars = v || null; paint(); };
+document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.l; try { localStorage.setItem('shopapp.gateLang', lang); } catch (e) {} paint(); }));
+$('show').addEventListener('click', () => { const p = $('p'); p.type = p.type === 'password' ? 'text' : 'password'; paint(); });
+
+/* ---- helpers ---- */
+const te = new TextEncoder(), td = new TextDecoder();
+const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const norm = u => String(u || '').trim().toLowerCase();
+const todayKey = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
+function db() { return new Promise(res => { try { const r = indexedDB.open('shopapp-auth', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); } catch (e) { res(null); } }); }
+async function kv(op, key, val) {
+  const d = await db(); if (!d) return null;
+  return new Promise(res => { try { const s = d.transaction('kv', op === 'get' ? 'readonly' : 'readwrite').objectStore('kv'); const q = op === 'get' ? s.get(key) : op === 'put' ? s.put(val, key) : s.delete(key); q.onsuccess = () => res(q.result); q.onerror = () => res(null); } catch (e) { res(null); } });
+}
+/* fetch: online copy when possible; `live` says whether it came from the internet */
+async function getJSON(url) {
+  try { const r = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) return { data: await r.json(), live: !r.headers.get('X-From-Cache') }; } catch (e) {}
+  try { const c = await caches.match(url); if (c) return { data: await c.json(), live: false }; } catch (e) {}
+  return { data: null, live: false };
+}
+async function unwrap(u, password, rec) {
+  const base = await crypto.subtle.importKey('raw', te.encode(password), 'PBKDF2', false, ['deriveKey']);
+  const kek = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64d(rec.salt), iterations: users.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
+  const raw = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64d(rec.iv), additionalData: te.encode(u + '|' + users.keyId) }, kek, b64d(rec.wrapped));
+  return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM' }, false, ['decrypt']);
+}
+async function openApp(sess) {
+  const { data: pkg } = await getJSON('app.enc');
+  if (!pkg) throw new Error('offline');
+  if (pkg.keyId !== sess.keyId) throw new Error('newver');
+  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64d(pkg.iv), additionalData: te.encode('app|' + pkg.keyId) }, sess.key, b64d(pkg.data));
+  let html = td.decode(plain);
+  window.SHOP_AUTH = Object.freeze({ user: sess.user, expires: sess.expires || '', logout: async () => { await kv('del', 'session'); location.hash = ''; location.reload(); } });
+  window.SHOP_PWA = 1;
+  document.open(); document.write(html); document.close();
+}
+const recOf = u => users && users.users && users.users[u];
+function statusOf(u) { const r = recOf(u); if (!r || r.disabled) return 'revoked'; if (r.expires && r.expires < todayKey()) return 'expired'; return 'ok'; }
+
+/* ---- login ---- */
+let busy = false;
+$('f').addEventListener('submit', async e => {
+  e.preventDefault(); if (busy) return;
+  const u = norm($('u').value), p = $('p').value;
+  if (!u || !p) return say('empty');
+  let lock = 0; try { lock = +(localStorage.getItem('shopapp.gateLock') || 0); } catch (x) {}
+  if (lock > Date.now()) return say('wait', { n: Math.ceil((lock - Date.now()) / 1000) });
+  if (!users) { const r = await getJSON('users.json'); users = r.data; if (!users) return say('offline'); }
+  busy = true; $('go').disabled = true; $('go').textContent = tr('checking');
+  try {
+    const st = statusOf(u);
+    if (st === 'expired') throw new Error('expired');
+    const rec = recOf(u); if (!rec || rec.disabled) throw new Error('wrong');
+    let key; try { key = await unwrap(u, p, rec); } catch (x) { throw new Error('wrong'); }
+    try { localStorage.removeItem('shopapp.gateFails'); } catch (x) {}
+    const sess = { user: u, keyId: users.keyId, key, expires: rec.expires || '', at: Date.now() };
+    await kv('put', 'session', sess);
+    await openApp(sess);
+  } catch (x) {
+    const m = x && x.message;
+    if (m === 'wrong') { let n = 0; try { n = +(localStorage.getItem('shopapp.gateFails') || 0) + 1; localStorage.setItem('shopapp.gateFails', n); if (n >= 5) { localStorage.setItem('shopapp.gateLock', Date.now() + 30000 * Math.min(10, n - 4)); } } catch (y) {} say('wrong'); }
+    else if (m === 'expired' || m === 'offline' || m === 'newver') say(m);
+    else say('broken');
+    busy = false; $('go').disabled = false; $('go').textContent = tr('open');
+  }
+});
+
+/* ---- start ---- */
+(async () => {
+  paint();
+  if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js'); } catch (e) {} }
+  if (navigator.storage && navigator.storage.persist) { try { navigator.storage.persist(); } catch (e) {} }
+  const showLogin = k => { $('waitBox').hidden = true; $('loginBox').hidden = false; if (k) say(k); else paint(); setTimeout(() => $('u').focus(), 50); };
+  if (!(window.crypto && crypto.subtle && window.indexedDB)) { $('waitBox').hidden = true; $('loginBox').hidden = false; say('noCrypto'); $('go').disabled = true; return; }
+  const r = await getJSON('users.json'); users = r.data;
+  const sess = await kv('get', 'session');
+  if (!sess || !sess.key) return showLogin();
+  // check this phone's login against the latest users.json when online
+  if (users) {
+    const st = statusOf(sess.user);
+    if (r.live && st === 'revoked') { await kv('del', 'session'); return showLogin('revoked'); }
+    if (st === 'expired' || (sess.expires && sess.expires < todayKey())) { await kv('del', 'session'); return showLogin('expired'); }
+    if (r.live && users.keyId !== sess.keyId) { await kv('del', 'session'); return showLogin('newver'); }
+    if (r.live && recOf(sess.user)) sess.expires = recOf(sess.user).expires || '';
+  }
+  try { await openApp(sess); }
+  catch (e) { if (e && e.message === 'newver') { await kv('del', 'session'); return showLogin('newver'); } showLogin(e && e.message === 'offline' ? 'offline' : 'broken'); }
+})();
+}
+</script>
+</body>
+</html>
