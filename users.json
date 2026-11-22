@@ -14,6 +14,22 @@
    "note": "Owner",
    "expires": "",
    "created": "2026-11-21"
+  },
+  "ajit": {
+   "salt": "EsyGJ0oZpn1xGhrtfaO3uA==",
+   "iv": "6K47QeNsXdE3mAuY",
+   "wrapped": "HQW0CfaW9F7/HeItzjF7QfLEyK4WgJ/Nj8UHm6I1dCA/eXTmimx3dtJJZAKIRLHe",
+   "note": "AJIT_SHOP",
+   "expires": "",
+   "created": "2026-11-22"
+  },
+  "shop2": {
+   "salt": "QmvWYcV8dOAGtFkNlVgz+Q==",
+   "iv": "e83rgoR3zBDvVxQq",
+   "wrapped": "YGla07fKzrJbpRpQp5ECiaoxD1dUO6OjpOe1GQIq6TQhQxObWsR0FpG2zkfDp1mm",
+   "note": "SHOP2",
+   "expires": "",
+   "created": "2026-11-22"
   }
  }
 }
