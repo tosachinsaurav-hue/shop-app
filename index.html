@@ -2,183 +2,608 @@
 <html lang="hi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0E6B5E">
 <meta name="robots" content="noindex">
+<!-- Shop App · entry page (register, log in, download, unlock) · version 2 · 2026-11-22 -->
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
 <title>दुकान ऐप · Shop App</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@600;700&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="config.js"></script>
 <style>
-:root{--bg:#F5F3EF;--card:#fff;--ink:#1B1A17;--muted:#5E5A53;--line:#E4E0D8;--pri:#0E6B5E;--pri-ink:#fff;--seg:#E7E3DC;--bad:#B3261E;color-scheme:light}
-@media (prefers-color-scheme:dark){:root{--bg:#121311;--card:#1C1D1A;--ink:#ECEAE5;--muted:#A9A49B;--line:#33342F;--pri:#3FA592;--pri-ink:#07201B;--seg:#2C2D29;--bad:#F2867E;color-scheme:dark}}
+:root{--bg:#F5F3EF;--card:#fff;--ink:#1B1A17;--muted:#5E5A53;--line:#E4E0D8;--pri:#0E6B5E;--pri-ink:#fff;--soft:#E3F2EF;--seg:#E7E3DC;--bad:#B3261E;--bad-bg:#FDECEA;--warn-bg:#FCEBD6;--warn:#8A4A04;color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#121311;--card:#1C1D1A;--ink:#ECEAE5;--muted:#A9A49B;--line:#33342F;--pri:#3FA592;--pri-ink:#07201B;--soft:#17302B;--seg:#2C2D29;--bad:#F2867E;--bad-bg:#3A1D1A;--warn-bg:#3A2A12;--warn:#F2C27D;color-scheme:dark}}
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.45 Inter,"Noto Sans Devanagari",system-ui,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
-.top{display:flex;justify-content:flex-end;padding:12px 14px}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font:15px/1.45 Inter,"Noto Sans Devanagari",system-ui,sans-serif;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px}
+.brand{display:flex;align-items:center;gap:10px;font:700 17px "Space Grotesk",Inter,"Noto Sans Devanagari",sans-serif}
+.logo{width:36px;height:36px;border-radius:11px;background:var(--pri);display:flex;align-items:center;justify-content:center;flex:none}
 .seg{display:flex;background:var(--seg);border-radius:999px;padding:3px;gap:2px}
 .seg button{border:0;background:transparent;border-radius:999px;min-height:36px;padding:0 12px;font:600 13px Inter,"Noto Sans Devanagari",sans-serif;color:var(--muted);cursor:pointer}
 .seg button[aria-pressed=true]{background:var(--card);color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.14)}
-main{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:12px 20px 40px}
-.box{width:min(400px,100%);display:flex;flex-direction:column;gap:16px}
-.logo{width:64px;height:64px;border-radius:18px;background:var(--pri);display:flex;align-items:center;justify-content:center}
-h1{margin:0;font:700 28px/1.15 "Space Grotesk",Inter,"Noto Sans Devanagari",sans-serif}
-p{margin:0}.muted{color:var(--muted)}.sm{font-size:13px}
-form{display:flex;flex-direction:column;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
-label{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
-input{border:1px solid var(--line);background:var(--card);border-radius:12px;min-height:50px;padding:0 14px;font:500 16px Inter,"Noto Sans Devanagari",sans-serif;color:var(--ink);width:100%}
-input:focus,button:focus-visible{outline:2px solid var(--pri);outline-offset:1px}
-.pw{position:relative}.pw input{padding-right:64px}
+main{flex:1;display:flex;justify-content:center;padding:8px 16px 40px}
+.box{width:min(440px,100%);display:flex;flex-direction:column;gap:16px}
+h1{margin:6px 0 0;font:700 27px/1.15 "Space Grotesk",Inter,"Noto Sans Devanagari",sans-serif}
+h2{margin:0;font:700 18px/1.25 Inter,"Noto Sans Devanagari",sans-serif}
+p{margin:0}.muted{color:var(--muted)}.sm{font-size:13px}.center{text-align:center}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;display:flex;flex-direction:column;gap:12px}
+form.card{gap:13px}
+label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:600;color:var(--muted)}
+input.i{border:1px solid var(--line);background:var(--card);border-radius:12px;min-height:50px;padding:0 14px;font:500 16px Inter,"Noto Sans Devanagari",sans-serif;color:var(--ink);width:100%}
+input.i:focus,button:focus-visible,a:focus-visible{outline:2px solid var(--pri);outline-offset:1px}
+.pw{position:relative}.pw input{padding-right:70px}
 .pw button{position:absolute;right:6px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--pri);font:600 13px Inter,"Noto Sans Devanagari",sans-serif;min-height:40px;padding:0 10px;cursor:pointer}
-.go{border:0;border-radius:14px;min-height:52px;background:var(--pri);color:var(--pri-ink);font:700 16px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer}
-.go[disabled]{opacity:.55;cursor:wait}
-.err{color:var(--bad);font-size:14px;font-weight:600;min-height:20px}
-.note{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px 14px;font-size:13px;color:var(--muted)}
-.wait{display:flex;align-items:center;gap:10px;color:var(--muted)}
-.spin{width:20px;height:20px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--pri);animation:sp 0.9s linear infinite}
+.btn{display:flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:14px;min-height:52px;padding:0 16px;font:700 16px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer;text-decoration:none;text-align:center}
+.btn.pri{background:var(--pri);border-color:var(--pri);color:var(--pri-ink)}
+.btn.wa{background:#1F8A4C;border-color:#1F8A4C;color:#fff}
+.btn[disabled]{opacity:.55;cursor:wait}
+.link{border:0;background:none;color:var(--pri);font:600 14px Inter,"Noto Sans Devanagari",sans-serif;cursor:pointer;padding:8px 2px;text-decoration:underline;text-underline-offset:3px}
+.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1 1 150px}
+.err{color:var(--bad);font-size:14px;font-weight:600}
+.msg{border-radius:14px;padding:12px 14px;font-size:14px;font-weight:600}
+.msg.bad{background:var(--bad-bg);color:var(--bad)}.msg.ok{background:var(--soft);color:var(--pri)}.msg.warn{background:var(--warn-bg);color:var(--warn)}
+.check{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--muted);cursor:pointer}
+.check input{width:22px;height:22px;margin:1px 0 0;flex:none;accent-color:var(--pri)}
+.creds{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;align-items:baseline;background:var(--soft);border-radius:14px;padding:14px 16px}
+.creds span{font-size:13px;color:var(--muted)}.creds b{font:700 20px/1.2 ui-monospace,Menlo,Consolas,monospace;word-break:break-all}
+.steps{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+.users{display:grid;grid-template-columns:repeat(auto-fill,minmax(128px,1fr));gap:10px}
+.user{display:flex;flex-direction:column;align-items:center;gap:6px;border:2px solid var(--line);background:var(--card);border-radius:16px;padding:14px 8px;cursor:pointer;color:var(--ink);font:600 14px Inter,"Noto Sans Devanagari",sans-serif}
+.user[aria-pressed=true]{border-color:var(--pri);background:var(--soft)}
+.user .av{width:44px;height:44px;border-radius:50%;background:var(--seg);display:flex;align-items:center;justify-content:center;font:700 18px Inter,sans-serif}
+.user[aria-pressed=true] .av{background:var(--pri);color:var(--pri-ink)}
+.user small{font-weight:500;color:var(--muted);font-size:12px}
+.wait{display:flex;align-items:center;justify-content:center;gap:10px;color:var(--muted);padding:40px 0}
+.spin{width:22px;height:22px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--pri);animation:sp .9s linear infinite;flex:none}
 @keyframes sp{to{transform:rotate(360deg)}}
 @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+.hero{display:flex;flex-direction:column;gap:6px;padding:8px 2px 4px}
+.feat{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.feat div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;font-size:13px;font-weight:600}
 [hidden]{display:none!important}
 </style>
 </head>
 <body>
-<div class="top"><div class="seg" role="group" aria-label="Language / भाषा"><button type="button" data-l="hi" lang="hi">हिंदी</button><button type="button" data-l="en" lang="en">EN</button></div></div>
-<main>
-  <div class="box">
-    <div class="logo" aria-hidden="true"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></div>
-    <div id="waitBox" class="wait" role="status"><span class="spin"></span><span data-t="opening"></span></div>
-    <div id="loginBox" class="box" hidden>
-      <div><h1 data-t="title"></h1><p class="muted" data-t="sub" style="margin-top:6px"></p></div>
-      <form id="f" autocomplete="on" novalidate>
-        <label><span data-t="user"></span><input id="u" name="username" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>
-        <label><span data-t="pass"></span><span class="pw"><input id="p" name="password" type="password" autocomplete="current-password" required><button type="button" id="show" data-t="show"></button></span></label>
-        <div class="err" id="err" role="alert"></div>
-        <button class="go" id="go" type="submit" data-t="open"></button>
-      </form>
-      <div class="note" id="contact" hidden></div>
-    </div>
-  </div>
-</main>
+<div class="top">
+  <div class="brand"><span class="logo" aria-hidden="true"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12v18l-3-2-3 2-3-2-3 2z"/><path d="M9 8h6M9 12h6"/></svg></span><span id="brand"></span></div>
+  <div class="seg" role="group" aria-label="Language / भाषा"><button type="button" data-l="hi" lang="hi">हिंदी</button><button type="button" data-l="en" lang="en">EN</button></div>
+</div>
+<main><div class="box" id="view" aria-live="polite"><div class="wait"><span class="spin"></span></div></div></main>
 <script>
 {
 'use strict';
+/* ================================================================ texts (English, हिंदी) */
 const W = {
-  opening: ['Opening the app…', 'ऐप खुल रहा है…'],
-  title: ['Shop App', 'दुकान ऐप'],
-  sub: ['Log in with the username and password you were given.', 'आपको दिए गए यूज़र नाम और पासवर्ड से लॉग इन करें।'],
-  user: ['Username', 'यूज़र नाम'], pass: ['Password', 'पासवर्ड'], show: ['Show', 'दिखाएँ'], hide: ['Hide', 'छिपाएँ'],
-  open: ['Log in', 'लॉग इन करें'], checking: ['Checking…', 'जाँच हो रही है…'],
-  wrong: ['Wrong username or password.', 'यूज़र नाम या पासवर्ड गलत है।'],
-  empty: ['Enter username and password.', 'यूज़र नाम और पासवर्ड डालें।'],
-  wait: ['Too many tries. Wait {n} seconds.', 'बहुत बार गलत हुआ। {n} सेकंड रुकें।'],
-  revoked: ['Access for this login has been stopped. Contact the app owner.', 'इस लॉग इन की अनुमति बंद कर दी गई है। ऐप के मालिक से संपर्क करें।'],
-  expired: ['This login has expired. Contact the app owner.', 'इस लॉग इन की अवधि खत्म हो गई है। ऐप के मालिक से संपर्क करें।'],
-  newver: ['A new version is available. Log in again to open it.', 'नया वर्ज़न आया है। खोलने के लिए फिर से लॉग इन करें।'],
-  offline: ['No internet. Connect once to log in on this phone.', 'इंटरनेट नहीं है। इस फ़ोन पर लॉग इन करने के लिए एक बार इंटरनेट चालू करें।'],
-  broken: ['The app files could not be read. Contact the app owner.', 'ऐप की फ़ाइलें नहीं पढ़ी जा सकीं। ऐप के मालिक से संपर्क करें।'],
-  noCrypto: ['This browser cannot open the app. Use Chrome on Android.', 'इस ब्राउज़र में ऐप नहीं खुल सकता। Android पर Chrome इस्तेमाल करें।'],
-  ask: ['Need a login? Ask {o}', 'लॉग इन चाहिए? {o} से संपर्क करें']
+  brand: ['Shop App', 'दुकान ऐप'],
+  tagline: ['Billing, stock and reports for your shop. Works without internet.', 'दुकान के बिल, स्टॉक और रिपोर्ट – बिना इंटरनेट के भी चलता है।'],
+  f1: ['GST & simple bills', 'GST और सादे बिल'], f2: ['Stock & low-stock alerts', 'स्टॉक और कम स्टॉक की चेतावनी'], f3: ['Staff logins', 'स्टाफ के अलग लॉग इन'], f4: ['WhatsApp bills & UPI QR', 'WhatsApp बिल और UPI QR'],
+  regBtn: ['Register your shop – free {n}-day trial', 'अपनी दुकान रजिस्टर करें – {n} दिन मुफ़्त'],
+  haveLogin: ['I already have a login', 'मेरे पास लॉग इन है'],
+  dlBtn: ['Download the Android app', 'Android ऐप डाउनलोड करें'],
+  regTitle: ['Register your shop', 'दुकान रजिस्टर करें'],
+  regSub: ['Takes one minute. Your password is made for you.', 'एक मिनट लगेगा। पासवर्ड अपने आप बनेगा।'],
+  shopName: ['Shop name', 'दुकान का नाम'], ownerName: ['Your name', 'आपका नाम'], mobile: ['Mobile number (WhatsApp)', 'मोबाइल नंबर (WhatsApp)'], city: ['Town / city', 'शहर / कस्बा'], optional: ['optional', 'ज़रूरी नहीं'],
+  agree: ['I agree that the app sends usage details and daily bill totals (no customer details) to the app provider, for support and billing.', 'मैं सहमत हूँ कि ऐप इस्तेमाल की जानकारी और रोज़ के बिलों का कुल (ग्राहकों की जानकारी नहीं) सपोर्ट और बिलिंग के लिए ऐप प्रदाता को भेजेगा।'],
+  create: ['Create my shop', 'मेरी दुकान बनाएँ'], working: ['Please wait…', 'कृपया रुकें…'],
+  back: ['Back', 'वापस'],
+  doneTitle: ['Your shop is ready', 'आपकी दुकान तैयार है'],
+  doneSub: ['Save these details now. You need them to log in.', 'ये जानकारी अभी सेव कर लें। लॉग इन के लिए ज़रूरी है।'],
+  shopId: ['Shop ID', 'दुकान ID'], loginId: ['Login', 'लॉग इन'], password: ['Password', 'पासवर्ड'], trialTill: ['Free till', 'मुफ़्त'],
+  sendMe: ['Send to my WhatsApp', 'मेरे WhatsApp पर भेजें'], copy: ['Copy', 'कॉपी करें'], copied: ['Copied', 'कॉपी हो गया'],
+  credMsg: ['Shop App login\nShop: {shop} ({id})\nLogin: {u}\nPassword: {p}\nApp: {link}', 'दुकान ऐप लॉग इन\nदुकान: {shop} ({id})\nलॉग इन: {u}\nपासवर्ड: {p}\nऐप: {link}'],
+  openShop: ['Open my shop', 'मेरी दुकान खोलें'],
+  nextTitle: ['Next: install the app', 'अगला कदम: ऐप इंस्टॉल करें'],
+  step1: ['Tap "Download the Android app" below.', 'नीचे "Android ऐप डाउनलोड करें" दबाएँ।'],
+  step2: ['Open the downloaded file. If Android asks, allow installing from this source, then tap Install. If Play Protect warns, tap "More details → Install anyway".', 'डाउनलोड हुई फ़ाइल खोलें। Android पूछे तो "इस स्रोत से इंस्टॉल करने दें" चालू करें, फिर Install दबाएँ। Play Protect चेतावनी दे तो "More details → Install anyway" दबाएँ।'],
+  step3: ['Open the app and log in with your mobile number and password. The phone switches on automatically.', 'ऐप खोलें और मोबाइल नंबर व पासवर्ड से लॉग इन करें। फ़ोन अपने आप चालू हो जाएगा।'],
+  step4: ['After that it works without internet.', 'उसके बाद यह बिना इंटरनेट के भी चलेगा।'],
+  loginTitle: ['Log in', 'लॉग इन करें'],
+  loginSub: ['Owners: your mobile number. Staff: the username from your owner.', 'मालिक: अपना मोबाइल नंबर। स्टाफ: मालिक से मिला यूज़र नाम।'],
+  userLbl: ['Mobile number or username', 'मोबाइल नंबर या यूज़र नाम'],
+  show: ['Show', 'दिखाएँ'], hide: ['Hide', 'छिपाएँ'],
+  loginBtn: ['Log in', 'लॉग इन करें'], forgot: ['Forgot password?', 'पासवर्ड भूल गए?'], newShop: ['New shop? Register', 'नई दुकान? रजिस्टर करें'],
+  hello: ['Hello, {n}', 'नमस्ते, {n}'],
+  stTrial: ['Free trial till {d}', '{d} तक मुफ़्त'], stActive: ['Active till {d}', '{d} तक चालू'], stActiveNoEnd: ['Active', 'चालू'], stExpired: ['Ended on {d}. Contact us to continue.', '{d} को ख़त्म। जारी रखने के लिए संपर्क करें।'],
+  useApp: ['Work happens in the Android app. Install it, then log in there with the same details.', 'काम Android ऐप में होता है। ऐप इंस्टॉल करें और उसमें इसी जानकारी से लॉग इन करें।'],
+  fgTitle: ['Reset your password', 'पासवर्ड बदलें'],
+  fgSub: ['Owners: ask us on WhatsApp for a 6-digit reset code. Staff: ask your shop owner for a new PIN.', 'मालिक: 6 अंकों का रीसेट कोड WhatsApp पर हमसे लें। स्टाफ: नया PIN दुकान मालिक से लें।'],
+  askCode: ['Ask for a reset code on WhatsApp', 'WhatsApp पर रीसेट कोड माँगें'],
+  askCodeMsg: ['Shop App: please send me a password reset code. My login: {u}', 'दुकान ऐप: कृपया पासवर्ड रीसेट कोड भेजें। मेरा लॉग इन: {u}'],
+  code: ['Reset code', 'रीसेट कोड'], newPass: ['New password (at least 8 characters)', 'नया पासवर्ड (कम से कम 8 अक्षर)'], makeOne: ['Make one for me', 'मेरे लिए बनाएँ'],
+  setPass: ['Set new password', 'नया पासवर्ड रखें'], resetDone: ['Password changed. Log in with the new password.', 'पासवर्ड बदल गया। नए पासवर्ड से लॉग इन करें।'],
+  aStartSub: ['Log in once with internet. After that the app works without internet.', 'एक बार इंटरनेट के साथ लॉग इन करें। उसके बाद ऐप बिना इंटरनेट के चलेगा।'],
+  who: ['Who is using the app?', 'ऐप कौन चला रहा है?'],
+  owner: ['Owner', 'मालिक'], staff: ['Staff', 'स्टाफ'],
+  pinLbl: ['PIN', 'PIN'], open: ['Open', 'खोलें'],
+  notListed: ['Someone else? Log in with internet', 'कोई और? इंटरनेट से लॉग इन करें'],
+  pickUser: ['Tap your name first.', 'पहले अपना नाम चुनें।'],
+  changedPw: ['Password changed on another phone? Log in with internet.', 'पासवर्ड किसी और फ़ोन पर बदला? इंटरनेट से लॉग इन करें।'],
+  helpWa: ['Message us on WhatsApp', 'WhatsApp पर हमसे बात करें'],
+  tryAgain: ['Try again', 'फिर से कोशिश करें'], checkAgain: ['Check again', 'फिर से जाँचें'],
+  dataSafe: ['The shop\'s data is safe on this phone.', 'दुकान का डेटा इसी फ़ोन में सुरक्षित है।'],
+  // problems
+  e_wrong: ['Wrong mobile number / username or password.', 'मोबाइल नंबर / यूज़र नाम या पासवर्ड गलत है।'],
+  e_wrongPin: ['Wrong password or PIN.', 'पासवर्ड या PIN गलत है।'],
+  e_locked: ['Too many wrong tries. Wait 15 minutes, or reset the password.', 'बहुत बार गलत हुआ। 15 मिनट रुकें या पासवर्ड रीसेट करें।'],
+  e_stopped: ['This login has been stopped by the shop owner.', 'दुकान मालिक ने यह लॉग इन बंद किया है।'],
+  e_shopBlocked: ['This shop\'s app has been switched off. Contact us.', 'इस दुकान का ऐप बंद कर दिया गया है। हमसे संपर्क करें।'],
+  e_phoneBlocked: ['This phone has been switched off for the app. Contact us.', 'इस फ़ोन पर ऐप बंद किया गया है। हमसे संपर्क करें।'],
+  e_removed: ['The owner removed this phone from the shop. Log in again to add it back.', 'मालिक ने यह फ़ोन दुकान से हटाया है। वापस जोड़ने के लिए फिर से लॉग इन करें।'],
+  e_expired: ['The free trial or plan has ended. Contact us to continue.', 'मुफ़्त समय या प्लान ख़त्म हो गया है। जारी रखने के लिए हमसे संपर्क करें।'],
+  e_tooManyPhones: ['This shop already uses all its phones. The owner can remove an old phone in the app (More → Staff & phones), or contact us.', 'इस दुकान के सभी फ़ोन पहले से इस्तेमाल में हैं। मालिक ऐप में पुराना फ़ोन हटा सकते हैं (और → स्टाफ और फ़ोन), या हमसे संपर्क करें।'],
+  e_otherShop: ['This phone is set up for another shop.', 'यह फ़ोन किसी दूसरी दुकान के लिए सेट है।'],
+  e_phoneUsed: ['This mobile number is already registered. Log in instead.', 'यह मोबाइल नंबर पहले से रजिस्टर है। लॉग इन करें।'],
+  e_phone: ['Enter a 10-digit mobile number.', '10 अंकों का मोबाइल नंबर डालें।'],
+  e_closed: ['New registrations are closed right now. Contact us.', 'अभी नए रजिस्ट्रेशन बंद हैं। हमसे संपर्क करें।'],
+  e_slow: ['Too many attempts. Try again later.', 'बहुत बार कोशिश हुई। थोड़ी देर बाद करें।'],
+  e_badCode: ['Wrong or old reset code.', 'रीसेट कोड गलत या पुराना है।'],
+  e_offline: ['No internet. Connect to the internet and try again.', 'इंटरनेट नहीं है। इंटरनेट चालू करके फिर कोशिश करें।'],
+  e_renew: ['Connect to the internet once to keep using the app.', 'ऐप चलाते रहने के लिए एक बार इंटरनेट चालू करें।'],
+  e_fill: ['Fill in the required fields.', 'ज़रूरी जानकारी भरें।'],
+  e_agree: ['Please tick the agreement to continue.', 'आगे बढ़ने के लिए सहमति पर टिक करें।'],
+  e_short: ['Use at least 8 characters.', 'कम से कम 8 अक्षर रखें।'],
+  e_server: ['Something went wrong. Try again in a minute.', 'कुछ गड़बड़ हुई। एक मिनट बाद कोशिश करें।'],
+  e_noApi: ['The app is not connected to its server yet.', 'ऐप अभी सर्वर से नहीं जुड़ा है।'],
+  e_broken: ['The app files could not be opened. Connect to the internet and try again.', 'ऐप की फ़ाइलें नहीं खुल सकीं। इंटरनेट चालू करके फिर कोशिश करें।'],
+  e_noCrypto: ['This browser cannot run the app. Use Chrome.', 'इस ब्राउज़र में ऐप नहीं चल सकता। Chrome इस्तेमाल करें।'],
+  t_expired: ['Plan ended', 'प्लान ख़त्म'], t_blocked: ['App switched off', 'ऐप बंद'], t_removed: ['Phone removed', 'फ़ोन हटाया गया'], t_renew: ['Internet needed', 'इंटरनेट चाहिए']
 };
+const CFG = window.SHOP_CONFIG || {};
+const AND = window.ShopAndroid && typeof window.ShopAndroid.info === 'function' ? window.ShopAndroid : null;
+const LOCK_MS = 5 * 60 * 1000;
 let lang = 'hi'; try { lang = localStorage.getItem('shopapp.gateLang') || 'hi'; } catch (e) {}
 const tr = (k, v) => { let s = (W[k] || [k, k])[lang === 'hi' ? 1 : 0]; if (v) for (const x in v) s = s.split('{' + x + '}').join(v[x]); return s; };
 const $ = id => document.getElementById(id);
-let msgKey = '', msgVars = null, users = null;
-function paint() {
-  document.documentElement.lang = lang;
-  document.querySelectorAll('[data-t]').forEach(el => { el.textContent = tr(el.dataset.t); });
-  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === lang)));
-  $('show').textContent = $('p').type === 'password' ? tr('show') : tr('hide');
-  $('err').textContent = msgKey ? tr(msgKey, msgVars) : '';
-  const c = $('contact');
-  if (users && (users.owner || users.contact)) { c.hidden = false; c.textContent = tr('ask', { o: [users.owner, users.contact].filter(Boolean).join(' · ') }); } else c.hidden = true;
-}
-const say = (k, v) => { msgKey = k; msgVars = v || null; paint(); };
-document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.l; try { localStorage.setItem('shopapp.gateLang', lang); } catch (e) {} paint(); }));
-$('show').addEventListener('click', () => { const p = $('p'); p.type = p.type === 'password' ? 'text' : 'password'; paint(); });
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const digits = s => String(s || '').replace(/\D/g, '');
+const fmtD = d => { if (!d) return ''; const x = String(d).replace(/^(\d{4})(\d{2})(\d{2})$/, '$1-$2-$3'); const [y, m, dd] = x.split('-'); return `${dd}-${m}-${y}`; };
+const pause = ms => new Promise(r => setTimeout(r, ms));
 
-/* ---- helpers ---- */
-const te = new TextEncoder(), td = new TextDecoder();
-const b64d = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
-const norm = u => String(u || '').trim().toLowerCase();
-const todayKey = () => { const d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0'); };
-function db() { return new Promise(res => { try { const r = indexedDB.open('shopapp-auth', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); } catch (e) { res(null); } }); }
+/* ================================================================ storage */
+function idb() { return new Promise(res => { try { const r = indexedDB.open('shopapp-auth', 1); r.onupgradeneeded = () => r.result.createObjectStore('kv'); r.onsuccess = () => res(r.result); r.onerror = () => res(null); } catch (e) { res(null); } }); }
 async function kv(op, key, val) {
-  const d = await db(); if (!d) return null;
+  const d = await idb(); if (!d) return null;
   return new Promise(res => { try { const s = d.transaction('kv', op === 'get' ? 'readonly' : 'readwrite').objectStore('kv'); const q = op === 'get' ? s.get(key) : op === 'put' ? s.put(val, key) : s.delete(key); q.onsuccess = () => res(q.result); q.onerror = () => res(null); } catch (e) { res(null); } });
 }
-/* fetch: online copy when possible; `live` says whether it came from the internet */
-async function getJSON(url) {
-  try { const r = await fetch(url + '?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) return { data: await r.json(), live: !r.headers.get('X-From-Cache') }; } catch (e) {}
-  try { const c = await caches.match(url); if (c) return { data: await c.json(), live: false }; } catch (e) {}
-  return { data: null, live: false };
-}
-async function unwrap(u, password, rec) {
-  const base = await crypto.subtle.importKey('raw', te.encode(password), 'PBKDF2', false, ['deriveKey']);
-  const kek = await crypto.subtle.deriveKey({ name: 'PBKDF2', salt: b64d(rec.salt), iterations: users.iter, hash: 'SHA-256' }, base, { name: 'AES-GCM', length: 256 }, false, ['decrypt']);
-  const raw = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64d(rec.iv), additionalData: te.encode(u + '|' + users.keyId) }, kek, b64d(rec.wrapped));
-  return crypto.subtle.importKey('raw', raw, { name: 'AES-GCM' }, false, ['decrypt']);
-}
-async function openApp(sess) {
-  const { data: pkg } = await getJSON('app.enc');
-  if (!pkg) throw new Error('offline');
-  if (pkg.keyId !== sess.keyId) throw new Error('newver');
-  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64d(pkg.iv), additionalData: te.encode('app|' + pkg.keyId) }, sess.key, b64d(pkg.data));
-  let html = td.decode(plain);
-  window.SHOP_AUTH = Object.freeze({ user: sess.user, expires: sess.expires || '', logout: async () => { await kv('del', 'session'); location.hash = ''; location.reload(); } });
-  window.SHOP_PWA = 1;
-  document.open(); document.write(html); document.close();
-}
-const recOf = u => users && users.users && users.users[u];
-function statusOf(u) { const r = recOf(u); if (!r || r.disabled) return 'revoked'; if (r.expires && r.expires < todayKey()) return 'expired'; return 'ok'; }
+const pref = { get: (k, d) => { try { const v = localStorage.getItem('shopapp.' + k); return v == null ? d : v; } catch (e) { return d; } }, set: (k, v) => { try { localStorage.setItem('shopapp.' + k, v); } catch (e) {} } };
 
-/* ---- login ---- */
-let busy = false;
-$('f').addEventListener('submit', async e => {
-  e.preventDefault(); if (busy) return;
-  const u = norm($('u').value), p = $('p').value;
-  if (!u || !p) return say('empty');
-  let lock = 0; try { lock = +(localStorage.getItem('shopapp.gateLock') || 0); } catch (x) {}
-  if (lock > Date.now()) return say('wait', { n: Math.ceil((lock - Date.now()) / 1000) });
-  if (!users) { const r = await getJSON('users.json'); users = r.data; if (!users) return say('offline'); }
-  busy = true; $('go').disabled = true; $('go').textContent = tr('checking');
+/* ================================================================ crypto: passwords never leave the phone */
+const te = new TextEncoder(), td = new TextDecoder();
+const b64 = buf => { const a = new Uint8Array(buf); let s = ''; for (let i = 0; i < a.length; i += 0x8000) s += String.fromCharCode.apply(null, a.subarray(i, i + 0x8000)); return btoa(s); };
+const unb64 = s => Uint8Array.from(atob(s), c => c.charCodeAt(0));
+const rnd = n => crypto.getRandomValues(new Uint8Array(n));
+const ITER = 100000;
+async function derive(pw, salt, iter) {
+  const k = await crypto.subtle.importKey('raw', te.encode(pw), 'PBKDF2', false, ['deriveBits']);
+  return new Uint8Array(await crypto.subtle.deriveBits({ name: 'PBKDF2', salt: unb64(salt), iterations: iter, hash: 'SHA-256' }, k, 256));
+}
+const verOf = async d => b64(await crypto.subtle.digest('SHA-256', d));
+async function makePass(pw) { const salt = b64(rnd(16)); const d = await derive(pw, salt, ITER); return { pass: { salt, iter: ITER, ver: await verOf(d) }, proof: b64(d) }; }
+const WORDS = 'aam anar badam chai dahi gulab haldi imli jamun kaju kesar kela lassi mango mirch moti neem pista rani sona tara zeera kamal barfi jalebi laddu rabri kulfi peda tulsi gajar mooli palak methi ganna nimbu papita amla chana moong rajma sooji besan ghee makhan paneer khoya kheer halwa puri roti naan dosa idli vada poha upma bhel chaat samosa pakora kachori paratha'.split(' ');
+const rint = n => { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; };
+const ownerPw = () => WORDS[rint(WORDS.length)] + '-' + String(rint(9000) + 1000);
+const staffPin = () => String(rint(900000) + 100000);
+
+/* ================================================================ server */
+async function api(a, body) {
+  if (!CFG.api || /YOUR|example/.test(CFG.api)) throw new Error('noApi');
+  const ctl = 'AbortController' in window ? new AbortController() : null;
+  const timer = ctl ? setTimeout(() => ctl.abort(), 30000) : 0;
   try {
-    const st = statusOf(u);
-    if (st === 'expired') throw new Error('expired');
-    const rec = recOf(u); if (!rec || rec.disabled) throw new Error('wrong');
-    let key; try { key = await unwrap(u, p, rec); } catch (x) { throw new Error('wrong'); }
-    try { localStorage.removeItem('shopapp.gateFails'); } catch (x) {}
-    const sess = { user: u, keyId: users.keyId, key, expires: rec.expires || '', at: Date.now() };
-    await kv('put', 'session', sess);
-    await openApp(sess);
-  } catch (x) {
-    const m = x && x.message;
-    if (m === 'wrong') { let n = 0; try { n = +(localStorage.getItem('shopapp.gateFails') || 0) + 1; localStorage.setItem('shopapp.gateFails', n); if (n >= 5) { localStorage.setItem('shopapp.gateLock', Date.now() + 30000 * Math.min(10, n - 4)); } } catch (y) {} say('wrong'); }
-    else if (m === 'expired' || m === 'offline' || m === 'newver') say(m);
-    else say('broken');
-    busy = false; $('go').disabled = false; $('go').textContent = tr('open');
-  }
-});
+    const r = await fetch(CFG.api, { method: 'POST', body: JSON.stringify(Object.assign({ a }, body)), signal: ctl ? ctl.signal : undefined, redirect: 'follow' });
+    if (!r.ok) throw new Error('server');
+    return await r.json();
+  } catch (e) {
+    if (e && (e.message === 'server' || e.message === 'noApi')) throw e;
+    throw new Error(navigator.onLine === false ? 'offline' : 'offline');
+  } finally { clearTimeout(timer); }
+}
+async function proofFor(u, pw) { const s = await api('salt', { u }); if (!s.ok) throw new Error(s.err || 'server'); return b64(await derive(pw, s.salt, s.iter)); }
 
-/* ---- start ---- */
-(async () => {
-  paint();
-  if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js'); } catch (e) {} }
-  if (navigator.storage && navigator.storage.persist) { try { navigator.storage.persist(); } catch (e) {} }
-  const showLogin = k => { $('waitBox').hidden = true; $('loginBox').hidden = false; if (k) say(k); else paint(); setTimeout(() => $('u').focus(), 50); };
-  if (!(window.crypto && crypto.subtle && window.indexedDB)) { $('waitBox').hidden = true; $('loginBox').hidden = false; say('noCrypto'); $('go').disabled = true; return; }
-  const r = await getJSON('users.json'); users = r.data;
-  const sess = await kv('get', 'session');
-  if (!sess || !sess.key) return showLogin();
-  // check this phone's login against the latest users.json when online
-  if (users) {
-    const st = statusOf(sess.user);
-    if (r.live && st === 'revoked') { await kv('del', 'session'); return showLogin('revoked'); }
-    if (st === 'expired' || (sess.expires && sess.expires < todayKey())) { await kv('del', 'session'); return showLogin('expired'); }
-    if (r.live && users.keyId !== sess.keyId) { await kv('del', 'session'); return showLogin('newver'); }
-    if (r.live && recOf(sess.user)) sess.expires = recOf(sess.user).expires || '';
+/* ================================================================ Android bridge */
+function info() {
+  if (!AND) return null;
+  try { return JSON.parse(AND.info()); } catch (e) { return null; }
+}
+const DEV = (info() || {}).dev || '';
+
+/* ================================================================ screens */
+let screen = 'loading', data = {}, flash = null, busy = false;
+function show(s, d, f) { screen = s; data = d || {}; flash = f || null; busy = false; paint(); window.scrollTo(0, 0); }
+function msgBox() { return flash ? `<div class="msg ${flash[1] || 'bad'}" role="alert">${esc(flash[2] ? flash[0] : tr(flash[0]))}</div>` : ''; }
+function supportNo() { return digits((CFG.support) || ((cache.shop && cache.shop.cfg && cache.shop.cfg.support) || '')); }
+function waLink(num, text) { return 'https://wa.me/' + (num ? (num.length === 10 ? '91' + num : num) : '') + '?text=' + encodeURIComponent(text); }
+function helpBtn(text) { const n = supportNo(); return n ? `<a class="btn wa" href="${esc(waLink(n, text || 'Shop App: help please'))}" target="_blank" rel="noopener">${tr('helpWa')}</a>` : ''; }
+const apkUrl = () => (cache.shop && cache.shop.cfg && cache.shop.cfg.apk) || CFG.apk || 'download/ShopApp.apk';
+const pwField = (id, label, auto, extra) => `<label class="f">${label}<span class="pw"><input class="i" id="${id}" type="password" autocomplete="${auto}" ${extra || ''}><button type="button" data-show="${id}">${tr('show')}</button></span></label>`;
+const installSteps = () => `<ol class="steps sm"><li>${tr('step1')}</li><li>${tr('step2')}</li><li>${tr('step3')}</li><li>${tr('step4')}</li></ol>`;
+const trialDays = () => (cache.cfg && cache.cfg.trialDays) || CFG.trialDays || 14;
+
+const V = {
+  loading: () => `<div class="wait"><span class="spin"></span><span>${tr('working')}</span></div>`,
+  home: () => `<div class="hero"><h1>${tr('brand')}</h1><p class="muted">${tr('tagline')}</p></div>
+    <div class="feat"><div>${tr('f1')}</div><div>${tr('f2')}</div><div>${tr('f3')}</div><div>${tr('f4')}</div></div>${msgBox()}
+    <button class="btn pri" data-go="register">${tr('regBtn', { n: trialDays() })}</button>
+    <button class="btn" data-go="login">${tr('haveLogin')}</button>
+    ${AND ? '' : `<a class="btn" href="${esc(apkUrl())}" download>${tr('dlBtn')}</a>`}`,
+  register: () => `<div><h1>${tr('regTitle')}</h1><p class="muted" style="margin-top:6px">${tr('regSub')}</p></div>
+    <form class="card" id="regF" novalidate>
+      <label class="f">${tr('shopName')}<input class="i" id="rShop" maxlength="60" autocomplete="organization" required></label>
+      <label class="f">${tr('ownerName')}<input class="i" id="rOwner" maxlength="60" autocomplete="name" required></label>
+      <label class="f">${tr('mobile')}<input class="i" id="rPhone" type="tel" inputmode="numeric" maxlength="14" autocomplete="tel-national" placeholder="98xxxxxxxx" required></label>
+      <label class="f">${tr('city')} <span class="sm">(${tr('optional')})</span><input class="i" id="rCity" maxlength="40" autocomplete="address-level2"></label>
+      <label class="check"><input type="checkbox" id="rAgree"><span>${tr('agree')}</span></label>
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('create')}</button>
+    </form>
+    <button class="link" data-go="${AND ? 'aStart' : 'home'}">${tr('back')}</button>`,
+  done: () => {
+    const c = data; const text = tr('credMsg', { shop: c.shopName, id: c.shopId, u: c.u, p: c.pw, link: location.origin + location.pathname });
+    return `<div><h1>${tr('doneTitle')}</h1><p class="muted" style="margin-top:6px">${tr('doneSub')}</p></div>
+    <div class="creds"><span>${tr('shopId')}</span><b>${esc(c.shopId)}</b><span>${tr('loginId')}</span><b>${esc(c.u)}</b><span>${tr('password')}</span><b>${esc(c.pw)}</b>${c.till ? `<span>${tr('trialTill')}</span><b style="font-size:16px">${esc(fmtD(c.till))}</b>` : ''}</div>
+    <div class="row"><a class="btn wa" href="${esc(waLink(c.u, text))}" target="_blank" rel="noopener">${tr('sendMe')}</a><button class="btn" data-copy="${esc(text)}">${tr('copy')}</button></div>
+    ${AND ? `<button class="btn pri" data-act="enterNew">${tr('openShop')}</button>`
+      : `<div class="card"><h2>${tr('nextTitle')}</h2>${installSteps()}<a class="btn pri" href="${esc(apkUrl())}" download>${tr('dlBtn')}</a></div>`}`;
+  },
+  login: () => `<div><h1>${tr('loginTitle')}</h1><p class="muted" style="margin-top:6px">${tr('loginSub')}</p></div>
+    <form class="card" id="logF" novalidate>
+      <label class="f">${tr('userLbl')}<input class="i" id="lU" autocomplete="username" autocapitalize="none" spellcheck="false" value="${esc(data.u || '')}" required></label>
+      ${pwField('lP', tr('password'), 'current-password', 'required')}
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('loginBtn')}</button>
+    </form>
+    <div class="row" style="justify-content:space-between"><button class="link" data-go="forgot" style="flex:none">${tr('forgot')}</button><button class="link" data-go="register" style="flex:none">${tr('newShop')}</button></div>
+    ${cache.shop && AND ? `<button class="link" data-go="unlock">${tr('back')}</button>` : `<button class="link" data-go="${AND ? 'aStart' : 'home'}">${tr('back')}</button>`}`,
+  welcome: () => {
+    const s = data.shop || {}, st = s.status === 'expired' ? tr('stExpired', { d: fmtD(s.till) }) : s.status === 'trial' ? tr('stTrial', { d: fmtD(s.till) }) : s.till ? tr('stActive', { d: fmtD(s.till) }) : tr('stActiveNoEnd');
+    return `<div><h1>${tr('hello', { n: esc(data.me.name) })}</h1><p class="muted" style="margin-top:6px">${esc(s.name)} · ${esc(s.id)}</p></div>
+    <div class="msg ${s.status === 'expired' ? 'bad' : 'ok'}">${esc(st)}</div>
+    <p>${tr('useApp')}</p>
+    <div class="card">${installSteps()}<a class="btn pri" href="${esc(apkUrl())}" download>${tr('dlBtn')}</a></div>
+    ${s.status === 'expired' ? helpBtn('Shop App: I want to continue. Shop ' + s.id) : ''}
+    <button class="link" data-go="home">${tr('back')}</button>`;
+  },
+  forgot: () => `<div><h1>${tr('fgTitle')}</h1><p class="muted" style="margin-top:6px">${tr('fgSub')}</p></div>
+    ${supportNo() ? `<a class="btn wa" id="askLink" href="${esc(waLink(supportNo(), tr('askCodeMsg', { u: data.u || '' })))}" target="_blank" rel="noopener">${tr('askCode')}</a>` : ''}
+    <form class="card" id="fgF" novalidate>
+      <label class="f">${tr('userLbl')}<input class="i" id="fU" autocomplete="username" autocapitalize="none" value="${esc(data.u || '')}" required></label>
+      <label class="f">${tr('code')}<input class="i" id="fC" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></label>
+      <label class="f">${tr('newPass')}<span class="pw"><input class="i" id="fP" type="text" autocomplete="new-password" required><button type="button" data-act="genPw">${tr('makeOne')}</button></span></label>
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('setPass')}</button>
+    </form>
+    <button class="link" data-go="login">${tr('back')}</button>`,
+  aStart: () => `<div class="hero"><h1>${tr('brand')}</h1><p class="muted">${tr('aStartSub')}</p></div>${msgBox()}
+    <button class="btn pri" data-go="login">${tr('loginTitle')}</button>
+    <button class="btn" data-go="register">${tr('regBtn', { n: trialDays() })}</button>`,
+  unlock: () => {
+    const users = (cache.shop.users || []).filter(u => u.status === 'active').sort((a, b) => (a.role === 'owner' ? -1 : 0) - (b.role === 'owner' ? -1 : 0) || a.name.localeCompare(b.name));
+    const sel = data.sel;
+    const me = users.find(u => u.u === sel);
+    return `<div><h1>${tr('who')}</h1><p class="muted" style="margin-top:6px">${esc(cache.shop.name)}</p></div>
+    <div class="users" role="group">${users.map(u => `<button type="button" class="user" data-sel="${esc(u.u)}" aria-pressed="${u.u === sel}"><span class="av">${esc(u.name.trim().charAt(0).toUpperCase() || '?')}</span>${esc(u.name)}<small>${tr(u.role === 'owner' ? 'owner' : 'staff')}</small></button>`).join('')}</div>
+    <form class="card" id="unF" novalidate ${me ? '' : 'hidden'}>
+      ${me ? pwField('uP', me.role === 'staff' ? tr('pinLbl') : tr('password'), 'current-password', me.role === 'staff' ? 'inputmode="numeric"' : '') : ''}
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('open')}</button>
+    </form>
+    ${me ? '' : msgBox()}
+    <div class="row" style="justify-content:space-between"><button class="link" data-go="login" style="flex:none">${tr('notListed')}</button><button class="link" data-go="forgot" style="flex:none">${tr('forgot')}</button></div>`;
+  },
+  stop: () => {
+    const k = data.kind;
+    const title = k === 'expired' ? 't_expired' : k === 'removed' ? 't_removed' : k === 'renew' ? 't_renew' : 't_blocked';
+    return `<div><h1>${tr(title)}</h1>${cache.shop ? `<p class="muted" style="margin-top:6px">${esc(cache.shop.name)} · ${esc(cache.shop.id)}</p>` : ''}</div>
+    <div class="msg ${k === 'renew' ? 'warn' : 'bad'}">${tr('e_' + k)}</div>
+    <p class="muted">${tr('dataSafe')}</p>
+    ${k === 'removed' ? `<button class="btn pri" data-go="login">${tr('loginTitle')}</button>` : `<button class="btn pri" data-go="${cache.shop && (cache.shop.users || []).length ? 'unlock' : 'login'}">${tr('checkAgain')}</button>`}
+    ${helpBtn('Shop App help · ' + (cache.shop ? cache.shop.id : '') + ' · ' + tr(title))}`;
+  },
+  fatal: () => `<div class="msg bad">${tr(data.k || 'e_broken')}</div><button class="btn pri" data-act="reload">${tr('tryAgain')}</button>`
+};
+
+function paint() {
+  document.documentElement.lang = lang;
+  $('brand').textContent = tr('brand');
+  document.querySelectorAll('.seg button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.l === lang)));
+  const keep = {}; document.querySelectorAll('#view input').forEach(i => { if (i.id) keep[i.id] = i.type === 'checkbox' ? i.checked : i.value; });
+  $('view').innerHTML = (V[screen] || V.loading)();
+  for (const id in keep) { const i = $(id); if (i) { if (i.type === 'checkbox') i.checked = keep[id]; else if (!i.value) i.value = keep[id]; } }
+}
+
+/* ================================================================ local state */
+const cache = { shop: null, cfg: null };
+async function saveShop(s) { cache.shop = s; await kv('put', 'shop', s); }
+const errKey = e => { const m = (e && (e.message || e.err || e)) || 'server'; return W['e_' + m] ? 'e_' + m : 'e_server'; };
+
+/* ================================================================ actions */
+async function doRegister() {
+  const shop = $('rShop').value.trim(), owner = $('rOwner').value.trim(), phone = digits($('rPhone').value).slice(-10), city = $('rCity').value.trim();
+  if (!shop || !owner) return show('register', {}, ['e_fill']);
+  if (!/^[6-9]\d{9}$/.test(phone)) return show('register', {}, ['e_phone']);
+  if (!$('rAgree').checked) return show('register', {}, ['e_agree']);
+  busy = true; paint();
+  try {
+    const pw = ownerPw();
+    const p = await makePass(pw);
+    const inf = info();
+    const r = await api('register', { shop, owner, phone, city, pass: p.pass, agree: true, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
+    if (!r.ok) throw new Error(r.err);
+    let sess = null;
+    if (AND) sess = await takeSession(r, p.proof);
+    pref.set('lastUser', r.me.u);
+    show('done', { shopName: r.shop.name, shopId: r.shop.id, u: r.me.u, pw, till: r.shop.till, sess });
+  } catch (e) { busy = false; show('register', {}, [errKey(e)]); }
+}
+
+async function doLogin() {
+  const u = $('lU').value.trim(), pw = $('lP').value;
+  if (!u || !pw) return show('login', { u }, ['e_fill']);
+  busy = true; paint();
+  try {
+    const proof = await proofFor(u, pw);
+    const inf = info();
+    const r = await api('login', { u, proof, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
+    if (!r.ok) throw new Error(r.err);
+    pref.set('lastUser', r.me.u);
+    if (!AND) return show('welcome', { shop: r.shop, me: r.me });
+    const sess = await takeSession(r, proof);
+    await enter(sess);
+  } catch (e) { busy = false; show('login', { u }, [errKey(e)]); }
+}
+
+/** Store what the server sent for this phone and switch the phone on. */
+async function takeSession(r, proof) {
+  const res = AND.activate(r.act, r.key, r.keyId || '');
+  if (res !== 'ok') throw new Error('server');
+  await saveShop({ id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, users: r.users, cfg: r.cfg, lastSync: Date.now(), stop: '' });
+  return { u: r.me.u, name: r.me.name, role: r.me.role, proof };
+}
+
+async function doForgot() {
+  const u = $('fU').value.trim(), code = digits($('fC').value), pw = $('fP').value;
+  if (!u || code.length !== 6) return show('forgot', { u }, ['e_fill']);
+  if (pw.length < 8) return show('forgot', { u }, ['e_short']);
+  busy = true; paint();
+  try {
+    const p = await makePass(pw);
+    const r = await api('reset', { u, code, pass: p.pass, dev: DEV });
+    if (!r.ok) throw new Error(r.err);
+    show('login', { u }, ['e_resetDone'.slice(2), 'ok']);
+  } catch (e) { busy = false; show('forgot', { u }, [errKey(e)]); }
+}
+
+async function doUnlock() {
+  const me = (cache.shop.users || []).find(u => u.u === data.sel);
+  if (!me) return show('unlock', {}, ['pickUser']);
+  const pw = $('uP').value;
+  if (!pw) return;
+  let fails = +pref.get('unlockFails', 0), lockedTill = +pref.get('unlockLock', 0);
+  if (lockedTill > Date.now()) return show('unlock', { sel: me.u }, ['e_locked']);
+  busy = true; paint();
+  try {
+    const d = await derive(pw, me.salt, me.iter);
+    if (await verOf(d) !== me.ver) {
+      fails++; pref.set('unlockFails', fails);
+      if (fails >= 6) pref.set('unlockLock', Date.now() + 60000 * Math.min(15, fails - 5));
+      return show('unlock', { sel: me.u }, [fails >= 3 ? 'changedPw' : 'e_wrongPin']);
+    }
+    pref.set('unlockFails', 0); pref.set('lastUser', me.u);
+    await enter({ u: me.u, name: me.name, role: me.role, proof: b64(d) });
+  } catch (e) { busy = false; show('unlock', { sel: me.u }, [errKey(e)]); }
+}
+
+/* ================================================================ sync with the server */
+async function syncNow(sess) {
+  const inf = info() || {};
+  let ops = (await kv('get', 'ops')) || [];
+  const left = [];
+  let offline = false;
+  for (const op of ops) {
+    if (offline || op.by !== sess.u) { left.push(op); continue; }
+    try {
+      const r = await api(op.a, Object.assign({}, op.body, { u: sess.u, proof: sess.proof, dev: DEV }));
+      if (r.ok && op.a === 'addStaff' && r.uname && r.uname !== op.body.uname) {
+        const x = (cache.shop.users || []).find(u => u.u === op.body.uname); if (x) x.u = r.uname;
+      }
+      if (!r.ok && (r.err === 'busy' || r.err === 'server')) left.push(op);
+    } catch (e) { offline = true; left.push(op); }
   }
-  try { await openApp(sess); }
-  catch (e) { if (e && e.message === 'newver') { await kv('del', 'session'); return showLogin('newver'); } showLogin(e && e.message === 'offline' ? 'offline' : 'broken'); }
+  await kv('put', 'ops', left);
+  if (offline) return { offline: true };
+  let r;
+  try { r = await api('ping', { u: sess.u, proof: sess.proof, dev: DEV, ver: String(inf.ver || ''), days: (await kv('get', 'days')) || [] }); }
+  catch (e) { return { offline: true }; }
+  if (!r.ok) return { err: r.err };
+  const shop = Object.assign({}, cache.shop || {});
+  if (r.stop && r.stop !== 'stopped') {
+    AND.deactivate();
+    shop.stop = r.stop; await saveShop(shop);
+    return { stop: r.stop };
+  }
+  if (r.act) AND.activate(r.act, r.key, r.keyId || '');
+  Object.assign(shop, { id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, cfg: r.cfg, lastSync: Date.now(), stop: '' });
+  if (!left.length) shop.users = r.users;
+  await saveShop(shop);
+  if (r.stop === 'stopped') return { stop: 'stopped' };
+  if (r.shop.status === 'expired') return { stop: 'expired' };
+  return { ok: true };
+}
+
+/* ================================================================ open the shop app */
+async function enter(sess) {
+  show('loading');
+  let key = AND.appKey();
+  if (!key && navigator.onLine !== false) {
+    const s = await syncNow(sess);
+    if (s.stop === 'stopped') return show('unlock', {}, ['e_stopped']);
+    if (s.stop) return show('stop', { kind: s.stop === 'shopBlocked' || s.stop === 'phoneBlocked' ? s.stop : s.stop });
+    if (s.err === 'wrong') return show('login', { u: sess.u }, ['changedPw']);
+    key = AND.appKey();
+  }
+  if (!key) {
+    const inf = info() || {};
+    const ended = cache.shop && cache.shop.status === 'expired';
+    return show('stop', { kind: ended ? 'expired' : 'renew', till: inf.till });
+  }
+  try { await openApp(sess, key); }
+  catch (e) { show('fatal', { k: e && e.message === 'offline' ? 'e_broken' : 'e_broken' }); }
+}
+
+async function getEnc() {
+  try { const r = await fetch('app.enc?t=' + Date.now(), { cache: 'no-store' }); if (r.ok) return await r.json(); } catch (e) {}
+  try { const c = await caches.match(new URL('app.enc', location.href).href); if (c) return await c.json(); } catch (e) {}
+  throw new Error('offline');
+}
+
+async function openApp(sess, keyB64) {
+  const pkg = await getEnc();
+  const key = await crypto.subtle.importKey('raw', unb64(keyB64), { name: 'AES-GCM' }, false, ['decrypt']);
+  const plain = await crypto.subtle.decrypt({ name: 'AES-GCM', iv: unb64(pkg.iv), additionalData: te.encode('app|' + pkg.keyId) }, key, unb64(pkg.data));
+  const html = td.decode(plain);
+  const listeners = new Set();
+  const notify = () => listeners.forEach(f => { try { f(); } catch (e) {} });
+  let syncing = null;
+  const inf0 = info() || {};
+  const status = () => {
+    const s = cache.shop || {}, inf = info() || {}, cfg = s.cfg || {};
+    const now = new Date(); const tk = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+    const left = ymd => { if (!ymd || ymd === '0') return null; const a = Date.UTC(+ymd.slice(0, 4), +ymd.slice(4, 6) - 1, +ymd.slice(6, 8)); const b = Date.UTC(now.getFullYear(), now.getMonth(), now.getDate()); return Math.round((a - b) / 864e5); };
+    return {
+      shopId: s.id, shopName: s.name, plan: s.status, till: s.till, planDaysLeft: s.till ? left(s.till.replace(/-/g, '')) : null,
+      offlineDaysLeft: left(inf.till), online: navigator.onLine !== false, lastSync: s.lastSync || 0, pending: pendingCount,
+      update: !!(cfg.latest && +inf.ver && cfg.latest > +inf.ver), apk: cfg.apk || CFG.apk || '', support: digits(cfg.support || CFG.support || ''), today: tk
+    };
+  };
+  let pendingCount = ((await kv('get', 'ops')) || []).length;
+  async function queue(op) {
+    const ops = (await kv('get', 'ops')) || [];
+    ops.push(Object.assign({ id: Date.now() + '-' + Math.random().toString(36).slice(2), by: sess.u, at: Date.now() }, op));
+    await kv('put', 'ops', ops); pendingCount = ops.length; notify();
+  }
+  async function sync() {
+    if (syncing) return syncing;
+    syncing = (async () => {
+      const r = await syncNow(sess);
+      pendingCount = ((await kv('get', 'ops')) || []).length;
+      if (r.stop || r.err === 'wrong') { pref.set('flash', r.stop === 'stopped' ? 'e_stopped' : r.err === 'wrong' ? 'changedPw' : ''); setTimeout(() => location.reload(), 300); }
+      notify();
+      return r;
+    })().finally(() => { syncing = null; });
+    return syncing;
+  }
+  const cleanUsers = () => (cache.shop.users || []).map(u => ({ u: u.u, name: u.name, role: u.role, status: u.status, pending: !!u.pending }));
+  function slug(name) { return String(name).toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '').slice(0, 12) || 'staff'; }
+  const AUTH = {
+    user: sess.u, name: sess.name, role: sess.role, shopId: cache.shop.id, shopName: cache.shop.name, expires: cache.shop.till || '',
+    status, users: cleanUsers,
+    onChange(f) { listeners.add(f); return () => listeners.delete(f); },
+    lock() { location.reload(); },
+    logout() { location.reload(); },
+    sync,
+    report(days) { if (!Array.isArray(days)) return; kv('put', 'days', days.slice(0, 14)); },
+    openUpdate() { const u = status().apk; if (u) AND.open(new URL(u, location.href).href); },
+    async addStaff(name) {
+      if (sess.role !== 'owner') throw new Error('ownerOnly');
+      name = String(name || '').trim().slice(0, 40); if (!name) throw new Error('fill');
+      const base = String(cache.shop.id).toLowerCase() + '-' + slug(name);
+      let uname = base, i = 2; while ((cache.shop.users || []).some(u => u.u === uname)) uname = base + (i++);
+      const pin = staffPin(), p = await makePass(pin);
+      cache.shop.users = (cache.shop.users || []).concat([{ u: uname, role: 'staff', name, status: 'active', salt: p.pass.salt, iter: p.pass.iter, ver: p.pass.ver, pending: true }]);
+      await saveShop(cache.shop);
+      await queue({ a: 'addStaff', body: { name, uname, pass: p.pass } });
+      sync();
+      notify();
+      return { uname, pin, name };
+    },
+    async setStaff(uname, what) {
+      if (sess.role !== 'owner') throw new Error('ownerOnly');
+      const x = (cache.shop.users || []).find(u => u.u === uname && u.role === 'staff'); if (!x) throw new Error('bad');
+      const body = { target: uname }; let pin = null;
+      if (what === 'stop' || what === 'allow') { body.status = what === 'stop' ? 'stopped' : 'active'; x.status = body.status; }
+      if (what === 'pin') { pin = staffPin(); const p = await makePass(pin); body.pass = p.pass; Object.assign(x, p.pass); }
+      x.pending = true;
+      await saveShop(cache.shop);
+      await queue({ a: 'setUser', body });
+      sync(); notify();
+      return { pin, uname, name: x.name };
+    },
+    async changePass(oldPw, newPw) {
+      if (String(newPw || '').length < 8) throw new Error('short');
+      const me = (cache.shop.users || []).find(u => u.u === sess.u);
+      if (!me || await verOf(await derive(oldPw, me.salt, me.iter)) !== me.ver) throw new Error('wrong');
+      const p = await makePass(newPw);
+      const r = await api('changePass', { u: sess.u, proof: sess.proof, dev: DEV, pass: p.pass });
+      if (!r.ok) throw new Error(r.err);
+      sess.proof = p.proof; cache.shop.users = r.users; await saveShop(cache.shop); notify();
+      return true;
+    },
+    async phones() {
+      const r = await api('devices', { u: sess.u, proof: sess.proof, dev: DEV });
+      if (!r.ok) throw new Error(r.err); return r;
+    },
+    async removePhone(id) {
+      const r = await api('removeDevice', { u: sess.u, proof: sess.proof, dev: DEV, target: id });
+      if (!r.ok) throw new Error(r.err); return r;
+    },
+    credText(c) { return tr('credMsg', { shop: cache.shop.name, id: cache.shop.id, u: c.uname, p: c.pin, link: location.origin + location.pathname }); }
+  };
+  window.SHOP_AUTH = Object.freeze(AUTH);
+  window.SHOP_PWA = 1;
+  // lock when the app comes back after a while (Android tells us how long it was away)
+  window.__shopResume = ms => { if (ms > LOCK_MS) location.reload(); else sync(); };
+  document.open(); document.write(html); document.close();
+  // listeners added before document.open are dropped by it, so add them now
+  window.addEventListener('online', () => sync());
+  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') pref.set('hiddenAt', Date.now()); });
+  setInterval(() => { if (navigator.onLine !== false) sync(); }, 10 * 60 * 1000);
+  setTimeout(() => sync(), 1500);
+  void inf0;
+}
+
+/* ================================================================ events */
+document.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { lang = b.dataset.l; pref.set('gateLang', lang); paint(); }));
+document.addEventListener('click', e => {
+  const t = e.target.closest('[data-go],[data-act],[data-sel],[data-show],[data-copy]');
+  if (!t) return;
+  if (t.dataset.go) { e.preventDefault(); const u = ($('lU') && $('lU').value) || ($('fU') && $('fU').value) || data.u || ''; show(t.dataset.go, t.dataset.go === 'unlock' ? { sel: pref.get('lastUser', '') } : { u }); return; }
+  if (t.dataset.sel) { show('unlock', { sel: t.dataset.sel }); setTimeout(() => { const p = $('uP'); if (p) p.focus(); }, 30); return; }
+  if (t.dataset.show) { const i = $(t.dataset.show); i.type = i.type === 'password' ? 'text' : 'password'; t.textContent = i.type === 'password' ? tr('show') : tr('hide'); return; }
+  if (t.dataset.copy) { const v = t.dataset.copy; (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).catch(() => { const x = document.createElement('textarea'); x.value = v; document.body.appendChild(x); x.select(); document.execCommand('copy'); x.remove(); }).finally(() => { t.textContent = tr('copied'); setTimeout(() => { t.textContent = tr('copy'); }, 1500); }); return; }
+  const a = t.dataset.act;
+  if (a === 'genPw') { $('fP').value = ownerPw(); }
+  if (a === 'enterNew' && data.sess) enter(data.sess);
+  if (a === 'reload') location.reload();
+});
+document.addEventListener('input', e => { if (e.target.id === 'fU' && $('askLink')) $('askLink').href = waLink(supportNo(), tr('askCodeMsg', { u: e.target.value.trim() })); });
+document.addEventListener('submit', e => {
+  e.preventDefault(); if (busy) return;
+  if (e.target.id === 'regF') doRegister();
+  if (e.target.id === 'logF') doLogin();
+  if (e.target.id === 'fgF') doForgot();
+  if (e.target.id === 'unF') doUnlock();
+});
+W.resetDone = W.resetDone || ['Password changed. Log in with the new password.', 'पासवर्ड बदल गया। नए पासवर्ड से लॉग इन करें।'];
+
+/* ================================================================ start */
+(async () => {
+  if ('serviceWorker' in navigator) { try { navigator.serviceWorker.register('sw.js'); } catch (e) {} }
+  if (!(window.crypto && crypto.subtle && window.indexedDB)) return show('fatal', { k: 'e_noCrypto' });
+  cache.shop = await kv('get', 'shop');
+  if (!AND) {
+    show('home');
+    try { const r = await api('config', {}); if (r.ok) { cache.cfg = r.cfg; if (screen === 'home') paint(); } } catch (e) {}
+    return;
+  }
+  if (navigator.storage && navigator.storage.persist) { try { navigator.storage.persist(); } catch (e) {} }
+  const s = cache.shop;
+  if (s && s.stop) return show('stop', { kind: s.stop === 'removed' ? 'removed' : s.stop });
+  const fl = pref.get('flash', ''); pref.set('flash', '');
+  if (s && (s.users || []).length) return show('unlock', { sel: pref.get('lastUser', '') }, fl ? [fl, 'warn'] : null);
+  show('aStart');
+  try { const r = await api('config', {}); if (r.ok) { cache.cfg = r.cfg; if (screen === 'aStart') paint(); } } catch (e) {}
 })();
 }
 </script>
