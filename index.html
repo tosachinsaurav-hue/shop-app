@@ -144,6 +144,7 @@ const W = {
   e_expired: ['The free trial or plan has ended. Contact us to continue.', 'मुफ़्त समय या प्लान ख़त्म हो गया है। जारी रखने के लिए हमसे संपर्क करें।'],
   e_tooManyPhones: ['This shop already uses all its phones. The owner can remove an old phone in the app (More → Staff & phones), or contact us.', 'इस दुकान के सभी फ़ोन पहले से इस्तेमाल में हैं। मालिक ऐप में पुराना फ़ोन हटा सकते हैं (और → स्टाफ और फ़ोन), या हमसे संपर्क करें।'],
   e_otherShop: ['This phone is set up for another shop.', 'यह फ़ोन किसी दूसरी दुकान के लिए सेट है।'],
+  e_loginShop: ['Your login is linked to a different shop in our records. Contact us on WhatsApp to fix it.', 'हमारे रिकॉर्ड में आपका लॉगिन किसी दूसरी दुकान से जुड़ा है। ठीक कराने के लिए WhatsApp पर संपर्क करें।'],
   e_phoneUsed: ['This mobile number is already registered. Log in instead.', 'यह मोबाइल नंबर पहले से रजिस्टर है। लॉग इन करें।'],
   e_phone: ['Enter a 10-digit mobile number.', '10 अंकों का मोबाइल नंबर डालें।'],
   e_closed: ['New registrations are closed right now. Contact us.', 'अभी नए रजिस्ट्रेशन बंद हैं। हमसे संपर्क करें।'],
@@ -430,6 +431,7 @@ async function doLogin() {
 async function takeSession(r, proof, pw) {
   const res = AND.activate(r.act, r.key, r.keyId || '');
   if (res !== 'ok') throw new Error('server');
+  pref.set('relogin', ''); // a full online login clears "must log in again"
   await saveShop({ id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, users: r.users, cfg: r.cfg, lastSync: Date.now(), stop: '', needEmail: !!r.needEmail });
   return { u: r.me.u, name: r.me.name, role: r.me.role, proof, pw };
 }
@@ -481,6 +483,9 @@ async function doUnlock() {
   if (!me) return show('unlock', {}, ['pickUser']);
   const pw = $('uP').value;
   if (!pw) return;
+  // the helper refused this login last time: with internet, check it online instead of on the phone
+  const re = String(pref.get('relogin', '')).split('|');
+  if (re[0] === me.u && navigator.onLine !== false) return show('login', { u: me.u }, [re[1] || 'changedPw']);
   let fails = +pref.get('unlockFails', 0), lockedTill = +pref.get('unlockLock', 0);
   if (lockedTill > Date.now()) return show('unlock', { sel: me.u }, ['e_locked']);
   busy = true; paint();
@@ -541,11 +546,13 @@ async function syncNow(sess) {
 async function enter(sess) {
   show('loading');
   let key = AND.appKey();
-  if (!key && navigator.onLine !== false) {
+  // 2.1.1: phones set up before 2.1 don't know yet whether the owner's email is missing, so ask the helper first.
+  const emailUnknown = sess.role === 'owner' && cache.shop && cache.shop.needEmail === undefined;
+  if ((!key || emailUnknown) && navigator.onLine !== false) {
     const s = await syncNow(sess);
     if (s.stop === 'stopped') return show('unlock', {}, ['e_stopped']);
     if (s.stop) return show('stop', { kind: s.stop === 'shopBlocked' || s.stop === 'phoneBlocked' ? s.stop : s.stop });
-    if (s.err === 'wrong') return show('login', { u: sess.u }, ['changedPw']);
+    if (s.err === 'wrong' || s.err === 'loginShop') { pref.set('relogin', sess.u + '|' + (s.err === 'wrong' ? 'changedPw' : 'e_loginShop')); return show('login', { u: sess.u }, [s.err === 'wrong' ? 'changedPw' : 'e_loginShop']); }
     key = AND.appKey();
   }
   if (sess.role === 'owner' && cache.shop && cache.shop.needEmail && navigator.onLine !== false) return show('addEmail', { sess });
@@ -594,7 +601,9 @@ async function openApp(sess, keyB64) {
     syncing = (async () => {
       const r = await syncNow(sess);
       pendingCount = ((await kv('get', 'ops')) || []).length;
-      if (r.stop || r.err === 'wrong') { pref.set('flash', r.stop === 'stopped' ? 'e_stopped' : r.err === 'wrong' ? 'changedPw' : ''); setTimeout(() => location.reload(), 300); }
+      // The helper refused this login: the phone must log in again with internet (no quick unlock), so it can't loop.
+      if (r.err === 'wrong' || r.err === 'loginShop') pref.set('relogin', sess.u + '|' + (r.err === 'wrong' ? 'changedPw' : 'e_loginShop'));
+      if (r.stop || r.err === 'wrong' || r.err === 'loginShop') { pref.set('flash', r.stop === 'stopped' ? 'e_stopped' : r.err === 'wrong' ? 'changedPw' : r.err === 'loginShop' ? 'e_loginShop' : ''); setTimeout(() => location.reload(), 300); }
       notify();
       return r;
     })().finally(() => { syncing = null; });
@@ -720,6 +729,8 @@ W.resetDone = W.resetDone || ['Password changed. Log in with the new password.',
   const s = cache.shop;
   if (s && s.stop) return show('stop', { kind: s.stop === 'removed' ? 'removed' : s.stop });
   const fl = pref.get('flash', ''); pref.set('flash', '');
+  const re = String(pref.get('relogin', '')).split('|');
+  if (re[0] && s && (s.users || []).length && navigator.onLine !== false) return show('login', { u: re[0] }, [fl || re[1] || 'changedPw']);
   if (s && (s.users || []).length) return show('unlock', { sel: pref.get('lastUser', '') }, fl ? [fl, 'warn'] : null);
   show('aStart');
   try { const r = await api('config', {}); if (r.ok) { cache.cfg = r.cfg; if (screen === 'aStart') paint(); } } catch (e) {}
