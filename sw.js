@@ -1,6 +1,6 @@
 // Offline support · version 2 · 2026-11-22
 // Only the entry page and the encrypted app are kept; app.enc can't be read without a phone that logged in.
-const CACHE = 'shopapp-secure-v2';
+const CACHE = 'shopapp-secure-v3';
 const CORE = ['./', './index.html', './config.js', './app.enc', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(CACHE).then(c => Promise.all(CORE.map(u => c.add(new Request(u, { cache: 'reload' })).catch(() => null)))).then(() => self.skipWaiting()));

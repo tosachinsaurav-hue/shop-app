@@ -83,7 +83,13 @@ const W = {
   haveLogin: ['I already have a login', 'मेरे पास लॉग इन है'],
   dlBtn: ['Download the Android app', 'Android ऐप डाउनलोड करें'],
   regTitle: ['Register your shop', 'दुकान रजिस्टर करें'],
-  regSub: ['Takes one minute. Your password is made for you.', 'एक मिनट लगेगा। पासवर्ड अपने आप बनेगा।'],
+  regSub: ['Takes two minutes. We email you a code to confirm.', 'दो मिनट लगेंगे। पक्का करने के लिए ईमेल पर कोड आएगा।'],
+  userNew: ['Choose a username', 'यूज़र नाम चुनें'], userHint: ['4–20 letters or numbers, e.g. sharmastore. You log in with it.', '4–20 अक्षर या अंक, जैसे sharmastore। इसी से लॉग इन करेंगे।'],
+  passNew: ['Choose a password (at least 8 characters)', 'पासवर्ड चुनें (कम से कम 8 अक्षर)'],
+  emailLbl: ['Email', 'ईमेल'], emailHint: ['For your code now, and to reset your password if you forget it.', 'अभी कोड के लिए, और पासवर्ड भूलने पर रीसेट के लिए।'],
+  next: ['Next', 'आगे'],
+  rcTitle: ['Check your email', 'अपना ईमेल देखें'], rcSub: ['We sent a 6-digit code to {to}. Type it here. Not there? Check spam.', '{to} पर 6 अंकों का कोड भेजा है। यहाँ लिखें। नहीं मिला? Spam देखें।'],
+  rcLbl: ['Code from the email', 'ईमेल वाला कोड'], resend: ['Send the code again', 'कोड फिर से भेजें'], changeDetails: ['Change details', 'जानकारी बदलें'], codeSent: ['Code sent.', 'कोड भेज दिया।'],
   shopName: ['Shop name', 'दुकान का नाम'], ownerName: ['Your name', 'आपका नाम'], mobile: ['Mobile number (WhatsApp)', 'मोबाइल नंबर (WhatsApp)'], city: ['Town / city', 'शहर / कस्बा'], optional: ['optional', 'ज़रूरी नहीं'],
   agree: ['I agree that the app sends usage details and daily bill totals (no customer details) to the app provider, for support and billing.', 'मैं सहमत हूँ कि ऐप इस्तेमाल की जानकारी और रोज़ के बिलों का कुल (ग्राहकों की जानकारी नहीं) सपोर्ट और बिलिंग के लिए ऐप प्रदाता को भेजेगा।'],
   create: ['Create my shop', 'मेरी दुकान बनाएँ'], working: ['Please wait…', 'कृपया रुकें…'],
@@ -97,18 +103,22 @@ const W = {
   nextTitle: ['Next: install the app', 'अगला कदम: ऐप इंस्टॉल करें'],
   step1: ['Tap "Download the Android app" below.', 'नीचे "Android ऐप डाउनलोड करें" दबाएँ।'],
   step2: ['Open the downloaded file. If Android asks, allow installing from this source, then tap Install. If Play Protect warns, tap "More details → Install anyway".', 'डाउनलोड हुई फ़ाइल खोलें। Android पूछे तो "इस स्रोत से इंस्टॉल करने दें" चालू करें, फिर Install दबाएँ। Play Protect चेतावनी दे तो "More details → Install anyway" दबाएँ।'],
-  step3: ['Open the app and log in with your mobile number and password. The phone switches on automatically.', 'ऐप खोलें और मोबाइल नंबर व पासवर्ड से लॉग इन करें। फ़ोन अपने आप चालू हो जाएगा।'],
+  step3: ['Open the app and log in with your username (or mobile number) and password. The phone switches on automatically.', 'ऐप खोलें और यूज़र नाम (या मोबाइल नंबर) व पासवर्ड से लॉग इन करें। फ़ोन अपने आप चालू हो जाएगा।'],
   step4: ['After that it works without internet.', 'उसके बाद यह बिना इंटरनेट के भी चलेगा।'],
   loginTitle: ['Log in', 'लॉग इन करें'],
-  loginSub: ['Owners: your mobile number. Staff: the username from your owner.', 'मालिक: अपना मोबाइल नंबर। स्टाफ: मालिक से मिला यूज़र नाम।'],
-  userLbl: ['Mobile number or username', 'मोबाइल नंबर या यूज़र नाम'],
+  loginSub: ['Owners: your username or mobile number. Staff: the username from your owner.', 'मालिक: अपना यूज़र नाम या मोबाइल नंबर। स्टाफ: मालिक से मिला यूज़र नाम।'],
+  userLbl: ['Username or mobile number', 'यूज़र नाम या मोबाइल नंबर'],
   show: ['Show', 'दिखाएँ'], hide: ['Hide', 'छिपाएँ'],
   loginBtn: ['Log in', 'लॉग इन करें'], forgot: ['Forgot password?', 'पासवर्ड भूल गए?'], newShop: ['New shop? Register', 'नई दुकान? रजिस्टर करें'],
   hello: ['Hello, {n}', 'नमस्ते, {n}'],
   stTrial: ['Free trial till {d}', '{d} तक मुफ़्त'], stActive: ['Active till {d}', '{d} तक चालू'], stActiveNoEnd: ['Active', 'चालू'], stExpired: ['Ended on {d}. Contact us to continue.', '{d} को ख़त्म। जारी रखने के लिए संपर्क करें।'],
   useApp: ['Work happens in the Android app. Install it, then log in there with the same details.', 'काम Android ऐप में होता है। ऐप इंस्टॉल करें और उसमें इसी जानकारी से लॉग इन करें।'],
   fgTitle: ['Reset your password', 'पासवर्ड बदलें'],
-  fgSub: ['Owners: ask us on WhatsApp for a 6-digit reset code. Staff: ask your shop owner for a new PIN.', 'मालिक: 6 अंकों का रीसेट कोड WhatsApp पर हमसे लें। स्टाफ: नया PIN दुकान मालिक से लें।'],
+  fgSub: ['Type your username or mobile number. We email a 6-digit code to the email saved for your shop. Staff: ask your shop owner for a new PIN.', 'अपना यूज़र नाम या मोबाइल नंबर लिखें। दुकान के ईमेल पर 6 अंकों का कोड आएगा। स्टाफ: नया PIN दुकान मालिक से लें।'],
+  sendCode: ['Email me a code', 'मुझे ईमेल पर कोड भेजें'], fgSent: ['Code sent to {to}. It works for 30 minutes.', '{to} पर कोड भेजा। 30 मिनट तक चलेगा।'],
+  haveCode: ['I already have a code', 'मेरे पास कोड है'], noEmailWa: ['No email? Ask us on WhatsApp', 'ईमेल नहीं है? WhatsApp पर हमसे पूछें'],
+  emTitle: ['Add your email', 'अपना ईमेल जोड़ें'], emSub: ['Needed once, so you can reset your password yourself if you forget it. We send a code to check it.', 'एक बार ज़रूरी है, ताकि पासवर्ड भूलने पर आप ख़ुद रीसेट कर सकें। जाँच के लिए कोड भेजेंगे।'],
+  emSend: ['Send code', 'कोड भेजें'], emSave: ['Save email', 'ईमेल सेव करें'],
   askCode: ['Ask for a reset code on WhatsApp', 'WhatsApp पर रीसेट कोड माँगें'],
   askCodeMsg: ['Shop App: please send me a password reset code. My login: {u}', 'दुकान ऐप: कृपया पासवर्ड रीसेट कोड भेजें। मेरा लॉग इन: {u}'],
   code: ['Reset code', 'रीसेट कोड'], newPass: ['New password (at least 8 characters)', 'नया पासवर्ड (कम से कम 8 अक्षर)'], makeOne: ['Make one for me', 'मेरे लिए बनाएँ'],
@@ -138,7 +148,14 @@ const W = {
   e_phone: ['Enter a 10-digit mobile number.', '10 अंकों का मोबाइल नंबर डालें।'],
   e_closed: ['New registrations are closed right now. Contact us.', 'अभी नए रजिस्ट्रेशन बंद हैं। हमसे संपर्क करें।'],
   e_slow: ['Too many attempts. Try again later.', 'बहुत बार कोशिश हुई। थोड़ी देर बाद करें।'],
-  e_badCode: ['Wrong or old reset code.', 'रीसेट कोड गलत या पुराना है।'],
+  e_badCode: ['Wrong or old code.', 'कोड गलत या पुराना है।'],
+  e_username: ['Username: 4–20 letters or numbers, starting with a letter (e.g. sharmastore).', 'यूज़र नाम: 4–20 अक्षर या अंक, अक्षर से शुरू (जैसे sharmastore)।'],
+  e_userTaken: ['This username is taken. Try another.', 'यह यूज़र नाम पहले से लिया हुआ है। दूसरा चुनें।'],
+  e_email: ['Enter a working email address.', 'सही ईमेल पता लिखें।'],
+  e_mail: ['The email could not be sent. Check the address, or try again later.', 'ईमेल नहीं भेजा जा सका। पता जाँचें या थोड़ी देर बाद कोशिश करें।'],
+  e_noUser: ['No login with that name or number.', 'इस नाम या नंबर का कोई लॉग इन नहीं है।'],
+  e_staffReset: ['Staff: ask your shop owner for a new PIN.', 'स्टाफ: दुकान मालिक से नया PIN लें।'],
+  e_noEmail: ['No email is saved for this shop. Ask us on WhatsApp for a reset code.', 'इस दुकान का कोई ईमेल सेव नहीं है। रीसेट कोड के लिए WhatsApp पर पूछें।'],
   e_offline: ['No internet. Connect to the internet and try again.', 'इंटरनेट नहीं है। इंटरनेट चालू करके फिर कोशिश करें।'],
   e_renew: ['Connect to the internet once to keep using the app.', 'ऐप चलाते रहने के लिए एक बार इंटरनेट चालू करें।'],
   e_fill: ['Fill in the required fields.', 'ज़रूरी जानकारी भरें।'],
@@ -185,6 +202,10 @@ const WORDS = 'aam anar badam chai dahi gulab haldi imli jamun kaju kesar kela l
 const rint = n => { const a = new Uint32Array(1); crypto.getRandomValues(a); return a[0] % n; };
 const ownerPw = () => WORDS[rint(WORDS.length)] + '-' + String(rint(9000) + 1000);
 const staffPin = () => String(rint(900000) + 100000);
+/* v2.1 */
+const okUser = u => /^[a-z][a-z0-9._-]{3,19}$/.test(u) && !/^s\d+-/.test(u);
+const okEmail = e => /^[^\s@<>()",;:]{1,64}@[a-z0-9.-]{1,190}\.[a-z]{2,}$/i.test(e);
+function suggestUser(shop) { let x = String(shop || '').toLowerCase().normalize('NFKD').replace(/[^a-z0-9]/g, '').slice(0, 16); if (!/^[a-z]/.test(x)) x = 'shop' + x; if (x.length < 4) x += String(rint(900) + 100); return x.slice(0, 20); }
 
 /* ================================================================ server */
 async function api(a, body) {
@@ -200,7 +221,7 @@ async function api(a, body) {
     throw new Error(navigator.onLine === false ? 'offline' : 'offline');
   } finally { clearTimeout(timer); }
 }
-async function proofFor(u, pw) { const s = await api('salt', { u }); if (!s.ok) throw new Error(s.err || 'server'); return b64(await derive(pw, s.salt, s.iter)); }
+async function proofFor(u, pw) { const s = await api('salt', { u }); if (!s.ok) throw new Error(s.err || 'server'); return { proof: b64(await derive(pw, s.salt, s.iter)), u: s.u || u }; }
 
 /* ================================================================ Android bridge */
 function info() {
@@ -234,11 +255,21 @@ const V = {
       <label class="f">${tr('ownerName')}<input class="i" id="rOwner" maxlength="60" autocomplete="name" required></label>
       <label class="f">${tr('mobile')}<input class="i" id="rPhone" type="tel" inputmode="numeric" maxlength="14" autocomplete="tel-national" placeholder="98xxxxxxxx" required></label>
       <label class="f">${tr('city')} <span class="sm">(${tr('optional')})</span><input class="i" id="rCity" maxlength="40" autocomplete="address-level2"></label>
+      <label class="f">${tr('userNew')}<input class="i" id="rUser" maxlength="20" autocapitalize="none" autocomplete="username" spellcheck="false" required><span class="sm">${tr('userHint')}</span></label>
+      <label class="f">${tr('passNew')}<span class="pw"><input class="i" id="rPass" type="text" autocomplete="new-password" required><button type="button" data-act="genReg">${tr('makeOne')}</button></span></label>
+      <label class="f">${tr('emailLbl')}<input class="i" id="rEmail" type="email" inputmode="email" maxlength="120" autocomplete="email" autocapitalize="none" required><span class="sm">${tr('emailHint')}</span></label>
       <label class="check"><input type="checkbox" id="rAgree"><span>${tr('agree')}</span></label>
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('next')}</button>
+    </form>
+    <button class="link" data-go="${AND ? 'aStart' : 'home'}">${tr('back')}</button>`,
+  regCode: () => `<div><h1>${tr('rcTitle')}</h1><p class="muted" style="margin-top:6px">${tr('rcSub', { to: esc(data.to || '') })}</p></div>
+    <form class="card" id="rcF" novalidate>
+      <label class="f">${tr('rcLbl')}<input class="i" id="rcCode" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></label>
       ${msgBox()}
       <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('create')}</button>
     </form>
-    <button class="link" data-go="${AND ? 'aStart' : 'home'}">${tr('back')}</button>`,
+    <div class="row" style="justify-content:space-between"><button class="link" data-act="regResend" style="flex:none">${tr('resend')}</button><button class="link" data-act="regEdit" style="flex:none">${tr('changeDetails')}</button></div>`,
   done: () => {
     const c = data; const text = tr('credMsg', { shop: c.shopName, id: c.shopId, u: c.u, p: c.pw, link: location.origin + location.pathname });
     return `<div><h1>${tr('doneTitle')}</h1><p class="muted" style="margin-top:6px">${tr('doneSub')}</p></div>
@@ -266,15 +297,31 @@ const V = {
     <button class="link" data-go="home">${tr('back')}</button>`;
   },
   forgot: () => `<div><h1>${tr('fgTitle')}</h1><p class="muted" style="margin-top:6px">${tr('fgSub')}</p></div>
-    ${supportNo() ? `<a class="btn wa" id="askLink" href="${esc(waLink(supportNo(), tr('askCodeMsg', { u: data.u || '' })))}" target="_blank" rel="noopener">${tr('askCode')}</a>` : ''}
-    <form class="card" id="fgF" novalidate>
+    ${data.step === 2 ? '' : `<form class="card" id="fg1F" novalidate>
+      <label class="f">${tr('userLbl')}<input class="i" id="fU" autocomplete="username" autocapitalize="none" value="${esc(data.u || '')}" required></label>
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('sendCode')}</button>
+    </form>
+    <button class="link" data-act="haveCode">${tr('haveCode')}</button>`}
+    ${data.wa && supportNo() ? `<a class="btn wa" id="askLink" href="${esc(waLink(supportNo(), tr('askCodeMsg', { u: data.u || '' })))}" target="_blank" rel="noopener">${tr('askCode')}</a>` : ''}
+    ${data.step !== 2 ? '' : `<form class="card" id="fgF" novalidate>
+      ${data.sent ? `<div class="msg ok">${tr('fgSent', { to: esc(data.sent) })}</div>` : ''}
       <label class="f">${tr('userLbl')}<input class="i" id="fU" autocomplete="username" autocapitalize="none" value="${esc(data.u || '')}" required></label>
       <label class="f">${tr('code')}<input class="i" id="fC" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></label>
       <label class="f">${tr('newPass')}<span class="pw"><input class="i" id="fP" type="text" autocomplete="new-password" required><button type="button" data-act="genPw">${tr('makeOne')}</button></span></label>
       ${msgBox()}
       <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : tr('setPass')}</button>
-    </form>
+    </form>`}
+    ${!data.wa && supportNo() ? `<a class="link" id="askLink" href="${esc(waLink(supportNo(), tr('askCodeMsg', { u: data.u || '' })))}" target="_blank" rel="noopener">${tr('noEmailWa')}</a>` : ''}
     <button class="link" data-go="login">${tr('back')}</button>`,
+  addEmail: () => `<div><h1>${tr('emTitle')}</h1><p class="muted" style="margin-top:6px">${tr('emSub')}</p></div>
+    <form class="card" id="emF" novalidate>
+      <label class="f">${tr('emailLbl')}<input class="i" id="emE" type="email" inputmode="email" maxlength="120" autocomplete="email" autocapitalize="none" value="${esc(data.email || '')}" ${data.to ? 'readonly' : ''} required></label>
+      ${data.to ? `<div class="msg ok">${tr('fgSent', { to: esc(data.to) })}</div><label class="f">${tr('rcLbl')}<input class="i" id="emC" inputmode="numeric" maxlength="6" autocomplete="one-time-code" required></label>` : ''}
+      ${msgBox()}
+      <button class="btn pri" type="submit" ${busy ? 'disabled' : ''}>${busy ? tr('working') : data.to ? tr('emSave') : tr('emSend')}</button>
+    </form>
+    ${data.to ? `<button class="link" data-act="emRestart">${tr('changeDetails')}</button>` : ''}`,
   aStart: () => `<div class="hero"><h1>${tr('brand')}</h1><p class="muted">${tr('aStartSub')}</p></div>${msgBox()}
     <button class="btn pri" data-go="login">${tr('loginTitle')}</button>
     <button class="btn" data-go="register">${tr('regBtn', { n: trialDays() })}</button>`,
@@ -319,23 +366,48 @@ async function saveShop(s) { cache.shop = s; await kv('put', 'shop', s); }
 const errKey = e => { const m = (e && (e.message || e.err || e)) || 'server'; return W['e_' + m] ? 'e_' + m : 'e_server'; };
 
 /* ================================================================ actions */
+let regPend = null; // the form between the two registration steps (kept only in memory)
 async function doRegister() {
-  const shop = $('rShop').value.trim(), owner = $('rOwner').value.trim(), phone = digits($('rPhone').value).slice(-10), city = $('rCity').value.trim();
-  if (!shop || !owner) return show('register', {}, ['e_fill']);
-  if (!/^[6-9]\d{9}$/.test(phone)) return show('register', {}, ['e_phone']);
-  if (!$('rAgree').checked) return show('register', {}, ['e_agree']);
+  const v = id => $(id).value.trim();
+  const form = { shop: v('rShop'), owner: v('rOwner'), phone: digits($('rPhone').value).slice(-10), city: v('rCity'), username: v('rUser').toLowerCase(), email: v('rEmail').toLowerCase() };
+  const pw = $('rPass').value;
+  const again = f => show('register', {}, [f]);
+  if (!form.shop || !form.owner) return again('e_fill');
+  if (!/^[6-9]\d{9}$/.test(form.phone)) return again('e_phone');
+  if (!okUser(form.username)) return again('e_username');
+  if (pw.length < 8) return again('e_short');
+  if (!okEmail(form.email)) return again('e_email');
+  if (!$('rAgree').checked) return again('e_agree');
   busy = true; paint();
   try {
-    const pw = ownerPw();
-    const p = await makePass(pw);
     const inf = info();
-    const r = await api('register', { shop, owner, phone, city, pass: p.pass, agree: true, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
+    const p = await makePass(pw);
+    regPend = Object.assign({}, form, { pw, p, agree: true, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
+    const r = await api('registerStart', regBody());
+    if (!r.ok) throw new Error(r.err);
+    show('regCode', { to: r.to });
+  } catch (e) { busy = false; show('register', {}, [errKey(e)]); }
+}
+const regBody = () => ({ shop: regPend.shop, owner: regPend.owner, phone: regPend.phone, city: regPend.city, username: regPend.username, email: regPend.email, pass: regPend.p.pass, pw: regPend.pw, agree: true, kind: regPend.kind, dev: regPend.dev, model: regPend.model, ver: regPend.ver });
+async function doRegCode() {
+  const code = digits($('rcCode').value);
+  if (code.length !== 6) return show('regCode', data, ['e_badCode']);
+  busy = true; paint();
+  try {
+    const r = await api('register', Object.assign(regBody(), { code }));
     if (!r.ok) throw new Error(r.err);
     let sess = null;
-    if (AND) sess = await takeSession(r, p.proof);
+    if (AND) sess = await takeSession(r, regPend.p.proof, regPend.pw);
     pref.set('lastUser', r.me.u);
+    const pw = regPend.pw; regPend = null;
     show('done', { shopName: r.shop.name, shopId: r.shop.id, u: r.me.u, pw, till: r.shop.till, sess });
-  } catch (e) { busy = false; show('register', {}, [errKey(e)]); }
+  } catch (e) { busy = false; show('regCode', data, [errKey(e)]); }
+}
+function regFill() { // back to the form with what was typed
+  if (!regPend) return;
+  const set = (id, x) => { const i = $(id); if (i) i.value = x || ''; };
+  set('rShop', regPend.shop); set('rOwner', regPend.owner); set('rPhone', regPend.phone); set('rCity', regPend.city); set('rUser', regPend.username); set('rPass', regPend.pw); set('rEmail', regPend.email);
+  const a = $('rAgree'); if (a) a.checked = true;
 }
 
 async function doLogin() {
@@ -343,36 +415,65 @@ async function doLogin() {
   if (!u || !pw) return show('login', { u }, ['e_fill']);
   busy = true; paint();
   try {
-    const proof = await proofFor(u, pw);
+    const pf = await proofFor(u, pw), proof = pf.proof;
     const inf = info();
-    const r = await api('login', { u, proof, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
+    const r = await api('login', { u: pf.u, proof, pw, kind: AND ? 'apk' : 'web', dev: inf ? inf.dev : '', model: inf ? inf.model : '', ver: inf ? String(inf.ver) : '' });
     if (!r.ok) throw new Error(r.err);
     pref.set('lastUser', r.me.u);
     if (!AND) return show('welcome', { shop: r.shop, me: r.me });
-    const sess = await takeSession(r, proof);
+    const sess = await takeSession(r, proof, pw);
     await enter(sess);
   } catch (e) { busy = false; show('login', { u }, [errKey(e)]); }
 }
 
 /** Store what the server sent for this phone and switch the phone on. */
-async function takeSession(r, proof) {
+async function takeSession(r, proof, pw) {
   const res = AND.activate(r.act, r.key, r.keyId || '');
   if (res !== 'ok') throw new Error('server');
-  await saveShop({ id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, users: r.users, cfg: r.cfg, lastSync: Date.now(), stop: '' });
-  return { u: r.me.u, name: r.me.name, role: r.me.role, proof };
+  await saveShop({ id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, users: r.users, cfg: r.cfg, lastSync: Date.now(), stop: '', needEmail: !!r.needEmail });
+  return { u: r.me.u, name: r.me.name, role: r.me.role, proof, pw };
 }
 
+async function doForgotStart() {
+  const u = $('fU').value.trim();
+  if (!u) return show('forgot', { u }, ['e_fill']);
+  busy = true; paint();
+  try {
+    const r = await api('resetStart', { u, dev: DEV });
+    if (!r.ok) throw new Error(r.err);
+    show('forgot', { u: r.u || u, step: 2, sent: r.to });
+  } catch (e) { busy = false; const k = errKey(e); show('forgot', { u, wa: ['e_noEmail', 'e_expired', 'e_shopBlocked', 'e_stopped', 'e_mail'].includes(k) }, [k]); }
+}
 async function doForgot() {
   const u = $('fU').value.trim(), code = digits($('fC').value), pw = $('fP').value;
-  if (!u || code.length !== 6) return show('forgot', { u }, ['e_fill']);
-  if (pw.length < 8) return show('forgot', { u }, ['e_short']);
+  const keep = { u, step: 2, sent: data.sent };
+  if (!u || code.length !== 6) return show('forgot', keep, ['e_fill']);
+  if (pw.length < 8) return show('forgot', keep, ['e_short']);
   busy = true; paint();
   try {
     const p = await makePass(pw);
-    const r = await api('reset', { u, code, pass: p.pass, dev: DEV });
+    const r = await api('reset', { u, code, pass: p.pass, pw, dev: DEV });
     if (!r.ok) throw new Error(r.err);
-    show('login', { u }, ['e_resetDone'.slice(2), 'ok']);
-  } catch (e) { busy = false; show('forgot', { u }, [errKey(e)]); }
+    show('login', { u: r.u || u }, ['e_resetDone'.slice(2), 'ok']);
+  } catch (e) { busy = false; show('forgot', keep, [errKey(e)]); }
+}
+async function doAddEmail() {
+  const sess = data.sess; if (!sess) return;
+  busy = true; paint();
+  try {
+    if (!data.to) {
+      const email = $('emE').value.trim().toLowerCase();
+      if (!okEmail(email)) { busy = false; return show('addEmail', { sess }, ['e_email']); }
+      const r = await api('emailStart', { u: sess.u, proof: sess.proof, dev: DEV, email });
+      if (!r.ok) throw new Error(r.err);
+      return show('addEmail', { sess, email, to: r.to });
+    }
+    const code = digits($('emC').value);
+    const r = await api('emailVerify', { u: sess.u, proof: sess.proof, dev: DEV, code });
+    if (!r.ok) throw new Error(r.err);
+    cache.shop.needEmail = false; await saveShop(cache.shop);
+    await enter(sess);
+  } catch (e) { busy = false; show('addEmail', data, [errKey(e)]); }
 }
 
 async function doUnlock() {
@@ -391,7 +492,7 @@ async function doUnlock() {
       return show('unlock', { sel: me.u }, [fails >= 3 ? 'changedPw' : 'e_wrongPin']);
     }
     pref.set('unlockFails', 0); pref.set('lastUser', me.u);
-    await enter({ u: me.u, name: me.name, role: me.role, proof: b64(d) });
+    await enter({ u: me.u, name: me.name, role: me.role, proof: b64(d), pw });
   } catch (e) { busy = false; show('unlock', { sel: me.u }, [errKey(e)]); }
 }
 
@@ -414,9 +515,13 @@ async function syncNow(sess) {
   await kv('put', 'ops', left);
   if (offline) return { offline: true };
   let r;
-  try { r = await api('ping', { u: sess.u, proof: sess.proof, dev: DEV, ver: String(inf.ver || ''), days: (await kv('get', 'days')) || [] }); }
+  const allDays = (await kv('get', 'days')) || [], sent = (await kv('get', 'sentDays')) || {};
+  const days = allDays.filter(x => x && sent[x.d] !== x.b + '|' + x.s);
+  try { r = await api('ping', { u: sess.u, proof: sess.proof, pw: sess.pw || undefined, dev: DEV, ver: String(inf.ver || ''), days }); }
   catch (e) { return { offline: true }; }
   if (!r.ok) return { err: r.err };
+  delete sess.pw;
+  if (days.length) { const keepFrom = new Date(Date.now() - 40 * 864e5).toISOString().slice(0, 10); for (const k in sent) if (k < keepFrom) delete sent[k]; days.forEach(x => { sent[x.d] = x.b + '|' + x.s; }); await kv('put', 'sentDays', sent); }
   const shop = Object.assign({}, cache.shop || {});
   if (r.stop && r.stop !== 'stopped') {
     AND.deactivate();
@@ -424,7 +529,7 @@ async function syncNow(sess) {
     return { stop: r.stop };
   }
   if (r.act) AND.activate(r.act, r.key, r.keyId || '');
-  Object.assign(shop, { id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, cfg: r.cfg, lastSync: Date.now(), stop: '' });
+  Object.assign(shop, { id: r.shop.id, name: r.shop.name, status: r.shop.status, till: r.shop.till, maxPhones: r.shop.maxPhones, cfg: r.cfg, lastSync: Date.now(), stop: '', needEmail: !!r.needEmail });
   if (!left.length) shop.users = r.users;
   await saveShop(shop);
   if (r.stop === 'stopped') return { stop: 'stopped' };
@@ -443,6 +548,7 @@ async function enter(sess) {
     if (s.err === 'wrong') return show('login', { u: sess.u }, ['changedPw']);
     key = AND.appKey();
   }
+  if (sess.role === 'owner' && cache.shop && cache.shop.needEmail && navigator.onLine !== false) return show('addEmail', { sess });
   if (!key) {
     const inf = info() || {};
     const ended = cache.shop && cache.shop.status === 'expired';
@@ -503,7 +609,7 @@ async function openApp(sess, keyB64) {
     lock() { location.reload(); },
     logout() { location.reload(); },
     sync,
-    report(days) { if (!Array.isArray(days)) return; kv('put', 'days', days.slice(0, 14)); },
+    report(days) { if (!Array.isArray(days)) return; kv('put', 'days', days.slice(0, 31)); },
     openUpdate() { const u = status().apk; if (u) AND.open(new URL(u, location.href).href); },
     async addStaff(name) {
       if (sess.role !== 'owner') throw new Error('ownerOnly');
@@ -513,7 +619,7 @@ async function openApp(sess, keyB64) {
       const pin = staffPin(), p = await makePass(pin);
       cache.shop.users = (cache.shop.users || []).concat([{ u: uname, role: 'staff', name, status: 'active', salt: p.pass.salt, iter: p.pass.iter, ver: p.pass.ver, pending: true }]);
       await saveShop(cache.shop);
-      await queue({ a: 'addStaff', body: { name, uname, pass: p.pass } });
+      await queue({ a: 'addStaff', body: { name, uname, pass: p.pass, pin } });
       sync();
       notify();
       return { uname, pin, name };
@@ -523,7 +629,7 @@ async function openApp(sess, keyB64) {
       const x = (cache.shop.users || []).find(u => u.u === uname && u.role === 'staff'); if (!x) throw new Error('bad');
       const body = { target: uname }; let pin = null;
       if (what === 'stop' || what === 'allow') { body.status = what === 'stop' ? 'stopped' : 'active'; x.status = body.status; }
-      if (what === 'pin') { pin = staffPin(); const p = await makePass(pin); body.pass = p.pass; Object.assign(x, p.pass); }
+      if (what === 'pin') { pin = staffPin(); const p = await makePass(pin); body.pass = p.pass; body.pin = pin; Object.assign(x, p.pass); }
       x.pending = true;
       await saveShop(cache.shop);
       await queue({ a: 'setUser', body });
@@ -535,7 +641,7 @@ async function openApp(sess, keyB64) {
       const me = (cache.shop.users || []).find(u => u.u === sess.u);
       if (!me || await verOf(await derive(oldPw, me.salt, me.iter)) !== me.ver) throw new Error('wrong');
       const p = await makePass(newPw);
-      const r = await api('changePass', { u: sess.u, proof: sess.proof, dev: DEV, pass: p.pass });
+      const r = await api('changePass', { u: sess.u, proof: sess.proof, dev: DEV, pass: p.pass, pw: newPw });
       if (!r.ok) throw new Error(r.err);
       sess.proof = p.proof; cache.shop.users = r.users; await saveShop(cache.shop); notify();
       return true;
@@ -574,17 +680,30 @@ document.addEventListener('click', e => {
   if (t.dataset.copy) { const v = t.dataset.copy; (navigator.clipboard ? navigator.clipboard.writeText(v) : Promise.reject()).catch(() => { const x = document.createElement('textarea'); x.value = v; document.body.appendChild(x); x.select(); document.execCommand('copy'); x.remove(); }).finally(() => { t.textContent = tr('copied'); setTimeout(() => { t.textContent = tr('copy'); }, 1500); }); return; }
   const a = t.dataset.act;
   if (a === 'genPw') { $('fP').value = ownerPw(); }
+  if (a === 'genReg') { $('rPass').value = ownerPw(); }
+  if (a === 'regResend' && regPend) { busy = true; paint(); api('registerStart', regBody()).then(r => show('regCode', { to: r.to || data.to }, r.ok ? ['codeSent', 'ok'] : [errKey(r.err)])).catch(e => show('regCode', data, [errKey(e)])); }
+  if (a === 'regEdit') { show('register'); regFill(); }
+  if (a === 'haveCode') show('forgot', { u: ($('fU') && $('fU').value.trim()) || data.u || '', step: 2 });
+  if (a === 'emRestart') show('addEmail', { sess: data.sess });
   if (a === 'enterNew' && data.sess) enter(data.sess);
   if (a === 'reload') location.reload();
 });
-document.addEventListener('input', e => { if (e.target.id === 'fU' && $('askLink')) $('askLink').href = waLink(supportNo(), tr('askCodeMsg', { u: e.target.value.trim() })); });
+document.addEventListener('input', e => {
+  if (e.target.id === 'fU' && $('askLink')) $('askLink').href = waLink(supportNo(), tr('askCodeMsg', { u: e.target.value.trim() }));
+  if (e.target.id === 'rShop' && $('rUser') && !$('rUser').dataset.typed) $('rUser').value = suggestUser(e.target.value);
+  if (e.target.id === 'rUser') e.target.dataset.typed = '1';
+});
 document.addEventListener('submit', e => {
   e.preventDefault(); if (busy) return;
   if (e.target.id === 'regF') doRegister();
   if (e.target.id === 'logF') doLogin();
   if (e.target.id === 'fgF') doForgot();
+  if (e.target.id === 'fg1F') doForgotStart();
+  if (e.target.id === 'rcF') doRegCode();
+  if (e.target.id === 'emF') doAddEmail();
   if (e.target.id === 'unF') doUnlock();
 });
+W.codeSent = W.codeSent || ['Code sent.', 'कोड भेज दिया।'];
 W.resetDone = W.resetDone || ['Password changed. Log in with the new password.', 'पासवर्ड बदल गया। नए पासवर्ड से लॉग इन करें।'];
 
 /* ================================================================ start */
